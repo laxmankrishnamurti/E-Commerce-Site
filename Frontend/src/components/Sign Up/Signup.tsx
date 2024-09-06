@@ -15,6 +15,7 @@ function Signup() {
                             <label className="text-text">Your name</label>
                             <input 
                                 type="text"
+                                name="name"
                                 placeholder="First name and last name"
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
@@ -23,6 +24,7 @@ function Signup() {
                             <label className="text-text">Mobile number</label>
                             <input 
                                 type="text"
+                                name="mobilenumber"
                                 placeholder="Mobile number"
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
@@ -31,6 +33,7 @@ function Signup() {
                             <label className="text-text">Password</label>
                             <input 
                                 type="password"
+                                name="password"
                                 placeholder="At least 6 characters"
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />

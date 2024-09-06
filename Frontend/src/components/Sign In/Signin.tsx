@@ -15,6 +15,7 @@ function Signin() {
                             <label className="text-text">Email or mobile phone number</label>
                             <input 
                                 type="text"
+                                name="emailorphone"
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
