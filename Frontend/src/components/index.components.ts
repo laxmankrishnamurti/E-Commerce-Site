@@ -1,7 +1,9 @@
-import Signup from "./Sign Up/Signup";
-import Signin from "./Sign In/Signin";
+import Signup from "./singup/Signup";
+import Signin from "./singin/Signin";
+import Header from "./header/Header";
 
 export {
     Signup,
-    Signin
+    Signin,
+    Header
 }
