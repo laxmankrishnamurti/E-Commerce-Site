@@ -30,3 +30,5 @@ E-Commerece type ===> B2C Model
   - Add products into the cart.
   - Purchase Products
   - Cancel the order
+
+#### Now, It's time to design the Frontend and Backend for the application.
