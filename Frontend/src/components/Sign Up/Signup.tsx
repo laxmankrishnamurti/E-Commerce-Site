@@ -8,7 +8,7 @@ function Signup() {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold">shopi</h1>
                 </div>
-                <div className="border-solid border border-black rounded-md p-3">
+                <div className="border-solid border border-black rounded-md p-3 shadow shadow-hbg">
                     <form>
                         <h2 className="text-2xl mb-4">Create Account</h2>
                         <div className="flex flex-col gap-1 mb-4">
