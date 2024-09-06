@@ -23,7 +23,9 @@ function Header() {
   return (
     <div className='w-full min-h-20 bg-hbg flex items-center justify-evenly'>
         <div className="text-center">
-            <h1 className="text-3xl font-bold text-bg">shopi</h1>
+            <h1 className="text-3xl font-bold text-bg">
+                <Link to={`/`}>shopi</Link>
+            </h1>
         </div>
         <div className='w-2/4 h-10'>
             <form className='w-full h-full flex items-center justify-center'>
