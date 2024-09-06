@@ -70,9 +70,9 @@ function Header() {
                 </div>
             </form>
         </div>
-        <div className='text-bg'>
-            <Link to={`/signin`}>Sign In</Link>
-            <Link to={`/signup`}>Sign Up</Link>
+        <div className='text-bg flex gap-4'>
+            <Link to={`/signin`} className='hover:text-bgh transition'>Sign In</Link>
+            <Link to={`/signup`} className='hover:text-bgh transition'>Sign Up</Link>
         </div>
     </div>
   )
