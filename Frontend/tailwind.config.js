@@ -10,6 +10,7 @@ export default {
       cta: "#e98a15",
       ctah: "#fa9e2d",
       bg: "#ece5f0",
+      bgh: "#dcb0f5",
       discount: "#eb0a0a",
       attention: "#59114d",
       text: "#012622",

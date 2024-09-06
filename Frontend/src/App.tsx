@@ -1,11 +1,12 @@
-import {Signup} from './components/index.components'
+import {Signup, Signin} from './components/index.components'
 
 function App() {
 
   return (
     <>
       <div className='font-sans'>
-        <Signup/>
+        {/* <Signup/> */}
+        <Signin/>
       </div>
     </>
   )
