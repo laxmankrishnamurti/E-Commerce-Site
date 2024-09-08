@@ -8,7 +8,7 @@ function Header() {
     const [selectWidth, setSelectWidth] = useState<string>("");
     const textRef = useRef<HTMLSpanElement | null>(null);
 
-    const options: string[] = ["Books", "Gym", "Bikes", "Home appliences", "Laptops"]
+    const options: string[] = ["Books", "Shoes", "Bikes", "Home appliences", "Laptops", "Clothes"]
 
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedOption(e.target.value)
@@ -16,7 +16,7 @@ function Header() {
 
     useEffect(() => {
         if (textRef.current) {
-          setSelectWidth(`${textRef.current.offsetWidth + 50}px`); // Adding some padding (50px)
+          setSelectWidth(`${textRef.current.offsetWidth + 40}px`); // Adding some padding (50px)
         }
       }, [selectedOption]);
 
@@ -42,7 +42,7 @@ function Header() {
                         onChange={handleSelectChange}
                         name="selectedOption" 
                         style={{ width: selectWidth }}
-                        className='outline-none appearance-none rounded-tl-md rounded-bl-md px-2  bg-bg'
+                        className='text-sm text-text outline-none appearance-none rounded-tl-md rounded-bl-md px-2  bg-bg'
                     >
                         <option></option>
                         {
