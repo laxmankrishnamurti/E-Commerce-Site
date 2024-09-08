@@ -5,7 +5,7 @@ import Footer from "./footer/Footer";
 import Home from "./home/Home";
 import Hero from "./home/hero/Hero";
 import Filter from "./products/filter/Filter";
-import ProductLists from "./products/productLists/ProductLists";
+import Product from "./products/product/Product";
 import ProductsComponent from "./products/productsComponent/ProductsComponent";
 
 export {
@@ -16,6 +16,6 @@ export {
     Home,
     Hero,
     Filter,
-    ProductLists,
+    Product,
     ProductsComponent
 }
