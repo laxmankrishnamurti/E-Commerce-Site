@@ -22,9 +22,9 @@ function Home() {
       <Hero/>
       <div className="px-40 py-8">
         <div>
-          <span className="text-2xl text-text font-semibold">Categories</span>
+          <span className="text-3xl text-text font-semibold">Categories</span>
         </div>
-        <div className='my-8 flex w-full flex-wrap justify-between'>
+        <div className='my-4 flex w-full flex-wrap justify-between'>
           {
             categories.map((category, index) => (
               <Category key={index} title={category.title} image={category.image}/>
