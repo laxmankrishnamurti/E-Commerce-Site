@@ -6,13 +6,14 @@ import {RouterProvider, Route, createBrowserRouter, createRoutesFromElements} fr
 
 import Root from './router/Root.tsx'
 import AuthRoot from './router/AuthRoot.tsx'
-import {Home, Signup, Signin} from './components/index.components.ts'
+import {Home, Signup, Signin, ProductsComponent} from './components/index.components.ts'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Root/>}>
         <Route path='/' element={<Home/>}/>
+        <Route path='/products/:category' element={<ProductsComponent/>}/>
       </Route>
       <Route element={<AuthRoot/>}>
         <Route path='/signin' element={<Signin/>}/>
