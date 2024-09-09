@@ -1,14 +1,10 @@
+import CustomFilter from './custom/CustomFilter';
 import './Filter.css'
 
-interface FilterProps {
+export interface FilterProps {
   category: string | undefined;
 }
 
-const filtersByCategory = {
-  books: ['Genre', 'Author', 'Language'],
-  mobiles: ['Brand', 'Price Range', 'Storage'],
-  laptops: ['Brand', 'Processor', 'RAM Size'],
-};
 
 function Filter({category}: FilterProps) {
 
@@ -32,6 +28,9 @@ function Filter({category}: FilterProps) {
           <button className='star-btn'>⭐⭐⭐⭐</button>
           <button className='star-btn'>⭐⭐⭐⭐⭐</button>
         </div>
+      </div>
+      <div className='flex flex-col gap-2'>
+        <CustomFilter category={category}/>
       </div>
     </div>
   )

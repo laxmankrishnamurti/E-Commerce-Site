@@ -9,7 +9,7 @@ import shoesImage from '../../../public/hero-shoes.jpg';
 function Home() {
 
   let categories = [
-    {title: "Education", image: educationImage}, 
+    {title: "Books", image: educationImage}, 
     {title: "Home Appliences", image: homeappliencesImage}, 
     {title: "Laptops", image: laptopImage}, 
     {title:"Shoes", image: shoesImage}, 

@@ -4,7 +4,21 @@ import laptopImage from '../../../public/lenovo.jpg'
 
 function ProductsComponent() {
 
-    const {category} = useParams<{category: string}>()
+    let {category} = useParams<{category: string}>()
+    console.log(category)
+    
+    // useEffect(() => {
+    //   if(category){
+    //     for(let i = 0; i < category.length;  i++){
+    //       if(category.charAt(i) !== " "){
+    //         category += category.charAt(i)
+    //         console.log("category",category)
+    //       }
+    //     }
+    //   }
+    // }, [category])
+
+    
 
     const products = [
       {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
