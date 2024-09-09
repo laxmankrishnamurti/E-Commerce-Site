@@ -42,7 +42,7 @@ function Header() {
                         onChange={handleSelectChange}
                         name="selectedOption" 
                         style={{ width: selectWidth }}
-                        className='text-sm text-text outline-none appearance-none rounded-tl-md rounded-bl-md px-2  bg-bg'
+                        className='text-sm text-text outline-none appearance-none rounded-tl-md rounded-bl-md px-2 bg-bg hover:cursor-pointer'
                     >
                         <option></option>
                         {

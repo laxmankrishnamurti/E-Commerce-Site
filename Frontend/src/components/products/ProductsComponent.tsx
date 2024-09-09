@@ -1,6 +1,6 @@
-import {Filter, Product, Pagination} from '../../index.components'
+import {Filter, Product, Pagination} from './index.products.components'
 import { useParams } from 'react-router-dom'
-import laptopImage from '../../../../public/lenovo.jpg'
+import laptopImage from '../../../public/lenovo.jpg'
 
 function ProductsComponent() {
 

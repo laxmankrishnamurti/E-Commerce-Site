@@ -1,4 +1,4 @@
-import { Hero } from "../index.components";
+import Hero from "./hero/Hero";
 import Category from "./category/Category";
 
 export {
