@@ -4,8 +4,7 @@ import laptopImage from '../../../public/lenovo.jpg'
 
 function ProductsComponent() {
 
-    const {category} = useParams()
-    console.log("Parrameter is : ", category)
+    const {category} = useParams<{category: string}>()
 
     const products = [
       {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
@@ -23,7 +22,7 @@ function ProductsComponent() {
     <>
       <div className='w-full px-28 py-8 flex justify-between'>   
         <div className='w-1/4 h-fit bg-bg p-4 rounded-md shadow-lg'>
-          <Filter/>
+          <Filter category={category}/>
         </div>
         <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
           {

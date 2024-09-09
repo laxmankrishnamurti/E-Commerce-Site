@@ -1,6 +1,17 @@
 import './Filter.css'
 
-function Filter() {
+interface FilterProps {
+  category: string | undefined;
+}
+
+const filtersByCategory = {
+  books: ['Genre', 'Author', 'Language'],
+  mobiles: ['Brand', 'Price Range', 'Storage'],
+  laptops: ['Brand', 'Processor', 'RAM Size'],
+};
+
+function Filter({category}: FilterProps) {
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
