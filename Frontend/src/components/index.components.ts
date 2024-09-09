@@ -6,6 +6,7 @@ import Home from "./home/Home";
 import Hero from "./home/hero/Hero";
 import Filter from "./products/filter/Filter";
 import Product from "./products/product/Product";
+import Pagination from "./products/pagination/Pagination";
 import ProductsComponent from "./products/productsComponent/ProductsComponent";
 
 export {
@@ -17,5 +18,6 @@ export {
     Hero,
     Filter,
     Product,
+    Pagination,
     ProductsComponent
 }
