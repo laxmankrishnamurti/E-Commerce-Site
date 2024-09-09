@@ -34,7 +34,7 @@ function CustomFilter({category}: FilterProps) {
               {
                 filter.options.map((filElm, index) => (
                   <div key={index}>
-                    <button className='s-price font-medium'>{filElm}</button>
+                    <button className='s-price font-medium hover:bg-ctah'>{filElm}</button>
                   </div>
                 ))
               }

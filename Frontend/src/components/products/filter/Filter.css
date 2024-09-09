@@ -6,6 +6,10 @@
     font-size: 15px;
 }
 
+.s-price:hover {
+    background-color: #fa9e2d;
+}
+
 .star-btn {
     display: block;
     margin-bottom: 5px;
