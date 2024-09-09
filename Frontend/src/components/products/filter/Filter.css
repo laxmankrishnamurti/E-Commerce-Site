@@ -1,0 +1,12 @@
+.s-price {
+    background-color: #e98a15;
+    color: #012622;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.star-btn {
+    display: block;
+    margin-bottom: 5px;
+}

@@ -22,7 +22,7 @@ function ProductsComponent() {
   return (
     <>
       <div className='w-full px-28 py-8 flex justify-between'>   
-        <div className='w-1/4 h-96 bg-bg p-3 rounded-md shadow-lg'>
+        <div className='w-1/4 h-fit bg-bg p-4 rounded-md shadow-lg'>
           <Filter/>
         </div>
         <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
