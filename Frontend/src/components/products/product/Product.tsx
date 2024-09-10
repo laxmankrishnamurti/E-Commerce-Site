@@ -7,6 +7,7 @@ interface productType{
 function Product({product}: {product:productType}) {
  
   const {image, title, price} = product
+  console.log("image : ", image)
 
   return (
     <div className="w-56 mb-4 flex flex-col gap-2 shadow p-4 ">

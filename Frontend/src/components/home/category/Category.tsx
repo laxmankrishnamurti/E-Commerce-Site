@@ -5,7 +5,10 @@ interface CategoryProps {
     image: string;
 }
 
-function Category({title, image}:CategoryProps) {
+function Category({category}:{category: CategoryProps}) {
+
+  const {title, image} = category;
+
   return (
     <Link to={`/products/${title.toLocaleLowerCase()}`}>
         <div className="w-80 h-72 my-8 p-4 flex flex-col rounded-md shadow-md hover:shadow-2xl transition duration-200 ease-in">

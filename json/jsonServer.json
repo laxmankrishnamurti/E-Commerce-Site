@@ -1,0 +1,13 @@
+{    
+    "laptops" : [
+        {"_id": 1,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 2,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 3,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 4,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 5,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 6,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 7,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 8,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
+        {"_id": 9,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500}
+    ]
+}

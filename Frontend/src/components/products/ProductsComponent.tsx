@@ -1,54 +1,73 @@
 import {Filter, Product, Pagination} from './index.products.components'
-import { useParams } from 'react-router-dom'
-import laptopImage from '../../../public/lenovo.jpg'
+import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios, {AxiosResponse} from 'axios'
+
+interface Products {
+  _id: number;
+  image: string;
+  title: string;
+  price: number
+}
 
 function ProductsComponent() {
+    const [products, setProducts] = useState<Products[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null)
 
     let {category} = useParams<{category: string}>()
-    console.log(category)
     
-    // useEffect(() => {
-    //   if(category){
-    //     for(let i = 0; i < category.length;  i++){
-    //       if(category.charAt(i) !== " "){
-    //         category += category.charAt(i)
-    //         console.log("category",category)
-    //       }
-    //     }
-    //   }
-    // }, [category])
+    useEffect(() => {
+      const fetchProducts = async () => {
+        try {
+          const response: AxiosResponse<Products[]> = await axios.get('http://localhost:3000/laptops')
+          setProducts(response.data)
+        } catch (error) {
+          setError('Error while fetching products')
+        } finally {
+          setLoading(false)
+        }
+      }
+      fetchProducts()
+    }, [])
 
-    
+    //Conditional rendering based on state
+    if(loading){
+      return (
+        <div className='w-full p-4 text-center font-semibold text-text'>
+          <span>Loading products.....</span>
+        </div>
+      )
+    }
 
-    const products = [
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-      {image:laptopImage, title: "Lenovo ideapad slim-3", price: 24500},
-    ]
+    if(error){
+      return (
+        <div>
+          <span>{error}</span>
+        </div>
+      )
+    }
 
+  //Rendering all products
   return (
     <>
-      <div className='w-full px-28 py-8 flex justify-between'>   
-        <div className='w-1/4 h-fit bg-bg p-4 rounded-md shadow-lg'>
-          <Filter category={category}/>
+        <div className='w-full px-28 py-8 flex justify-between'>   
+          <div className='w-1/4 h-fit bg-bg p-4 rounded-md shadow-lg'>
+            <Filter category={category}/>
+          </div>
+          <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
+            {
+              products.map((product, index) => (
+                <Link to={`/products/${category}/${product._id}`} key={index} >
+                  <Product product={product}/>
+                </Link>
+              ))
+            }
+          </div>
         </div>
-        <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
-          {
-            products.map((product, index) => (
-              <Product key={index} product={product}/>
-            ))
-          }
+        <div className="w-full px-28 mt-8 mb-24 flex justify-end">
+          <Pagination/>
         </div>
-      </div>
-      <div className="w-full px-28 mt-8 mb-24 flex justify-end">
-        <Pagination/>
-      </div>
     </>
   )
 }

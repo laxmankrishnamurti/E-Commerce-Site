@@ -4,6 +4,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Home from "./home/Home";
 import ProductsComponent from "./products/ProductsComponent";
+import ProductDetails from "./productDetails/ProductDetails";
 
 export {
     Signup,
@@ -11,5 +12,6 @@ export {
     Header,
     Footer,
     Home,
-    ProductsComponent
+    ProductsComponent,
+    ProductDetails
 }

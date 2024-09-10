@@ -9,12 +9,12 @@ import shoesImage from '/hero-shoes.jpg';
 function Home() {
 
   let categories = [
-    {title: "Books", image: educationImage}, 
-    {title: "Home Appliences", image: homeappliencesImage}, 
-    {title: "Laptops", image: laptopImage}, 
-    {title:"Shoes", image: shoesImage}, 
-    {title: "Bikes", image: bikeImage}, 
-    {title: "Clothes", image: clothesImage}
+    {_id: 1,title: "Books", image: educationImage}, 
+    {_id: 2,title: "Home Appliences", image: homeappliencesImage}, 
+    {_id: 3,title: "Laptops", image: laptopImage}, 
+    {_id: 4,title:"Shoes", image: shoesImage}, 
+    {_id: 5,title: "Bikes", image: bikeImage}, 
+    {_id: 6,title: "Clothes", image: clothesImage}
   ]
 
   return (
@@ -27,7 +27,7 @@ function Home() {
         <div className='my-4 flex w-full flex-wrap justify-between'>
           {
             categories.map((category, index) => (
-              <Category key={index} title={category.title} image={category.image}/>
+              <Category key={index} category={category}/>
             ))
           }
         </div>
