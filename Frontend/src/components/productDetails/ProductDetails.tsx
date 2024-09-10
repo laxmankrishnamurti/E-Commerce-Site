@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import {FirstHalf, SecondHalf} from './index.productDetails'
 
 function ProductDetails() {
 
@@ -6,7 +7,14 @@ function ProductDetails() {
     console.log("Parrams value in product details page : ", params)
 
   return (
-    <div>ProductDetails</div>
+    <div className="px-28 py-8">
+      <div>
+        <FirstHalf/>
+      </div>
+      <div>
+        <SecondHalf/>
+      </div>
+    </div>
   )
 }
 
