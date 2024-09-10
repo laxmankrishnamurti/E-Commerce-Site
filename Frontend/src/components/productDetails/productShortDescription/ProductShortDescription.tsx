@@ -10,7 +10,7 @@ function ProductShortDescription() {
         <span>{product.title}</span>
       </div>
       <div>
-        <span></span>
+        <span>{product.price}</span>
       </div>
     </div>
   )
