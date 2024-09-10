@@ -1,8 +1,18 @@
-
+import { RootState } from "../../../app/store"
+import { useSelector } from "react-redux"
 
 function ProductShortDescription() {
+  const product = useSelector((state: RootState) => state.singleProduct);
+
   return (
-    <div>ProductShortDescription</div>
+    <div>
+      <div>
+        <span>{product.title}</span>
+      </div>
+      <div>
+        <span></span>
+      </div>
+    </div>
   )
 }
 

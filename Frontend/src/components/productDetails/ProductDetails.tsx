@@ -5,11 +5,26 @@ import axios, {AxiosResponse} from "axios"
 import { useDispatch } from "react-redux";
 import {setSingleProduct} from '../../features/singleProduct/singleProductSlice'
 
+// shortDetails: {
+//   Brand?: string;  // Known key, but optional
+//   ModelName?: string;  // Known key, but optional
+//   [key: string]: any;  // Allow any other keys
+// };
+
+// description: {
+//   Manufacturer?: string;  // Known key, but optional
+//   [key: string]: any;  // Allow any other keys
+// };
+
+
 interface Product {
   id: number;
   title: string;
   image: string;
   price: number;
+  rating: number;
+  shortDetails: Record<string, any>;
+  description: Record<string, any>
 }
 
 function ProductDetails() {

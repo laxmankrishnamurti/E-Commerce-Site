@@ -1,13 +1,127 @@
-{    
-    "laptops" : [
-        {"id": 1,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 2,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 3,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 4,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 5,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 6,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 7,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 8,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500},
-        {"id": 9,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500}
+
+{
+    "laptops" :[
+        {"id": 1,
+        "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+        "title": "Lenovo ideapad slim-3", 
+        "price": 24500, 
+        "rating": 4.2, 
+        "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 2,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 3,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 4,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 5,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 6,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 7,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 8,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        },
+        {"id": 9,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
+            "Brand": "Acer",
+            "Model name": "Aspire Lite",
+            "Screen size": "15.6 inches",
+            "colour": "Steel Gray",
+            "CPU Model": "AMD Ryzen 5 5500U",
+            "RAM": "16GB"
+        },
+        "description": {
+            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+            "Processor Count": 1
+        }
+        }
     ]
 }
