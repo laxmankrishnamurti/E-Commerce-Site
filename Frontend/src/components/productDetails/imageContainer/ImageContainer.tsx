@@ -2,7 +2,7 @@ import ImagePreview from "./imagePreview/ImagePreview"
 
 function ImageContainer() {
   return (
-    <div>
+    <div className="w-full">
       <ImagePreview/>
     </div>
   )
