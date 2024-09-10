@@ -1,7 +1,10 @@
+import ImagePreview from "./imagePreview/ImagePreview"
 
 function ImageContainer() {
   return (
-    <div>ImageContainer</div>
+    <div>
+      <ImagePreview/>
+    </div>
   )
 }
 

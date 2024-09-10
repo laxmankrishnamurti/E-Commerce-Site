@@ -51,7 +51,7 @@ function ProductsComponent() {
   //Rendering all products
   return (
     <>
-        <div className='w-full px-28 py-8 flex justify-between'>   
+        <div className='mx-28 my-8 flex justify-between'>   
           <div className='w-1/4 h-fit bg-bg p-4 rounded-md shadow-lg'>
             <Filter category={category}/>
           </div>
