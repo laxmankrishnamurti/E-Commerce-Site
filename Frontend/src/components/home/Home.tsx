@@ -1,10 +1,10 @@
 import {Hero, Category} from './index.homecomponents';
-import educationImage from '../../../public/books.jpg';
-import homeappliencesImage from '../../../public/home-appliences.jpg';
-import laptopImage from '../../../public/lenovo.jpg';
-import bikeImage from '../../../public/bikes.jpg';
-import clothesImage from '../../../public/clothes.jpg';
-import shoesImage from '../../../public/hero-shoes.jpg';
+import educationImage from '/books.jpg';
+import homeappliencesImage from '/home-appliences.jpg';
+import laptopImage from '/lenovo.jpg';
+import bikeImage from '/bikes.jpg';
+import clothesImage from '/clothes.jpg';
+import shoesImage from '/hero-shoes.jpg';
 
 function Home() {
 
