@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import axios, {AxiosResponse} from 'axios'
 
 interface Products {
-  _id: number;
+  id: number;
   image: string;
   title: string;
   price: number
@@ -58,7 +58,7 @@ function ProductsComponent() {
           <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
             {
               products.map((product, index) => (
-                <Link to={`/products/${category}/${product._id}`} key={index} >
+                <Link to={`/products/${category}/${product.id}`} key={index} >
                   <Product product={product}/>
                 </Link>
               ))

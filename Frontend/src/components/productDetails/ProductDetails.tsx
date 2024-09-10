@@ -2,25 +2,30 @@ import { useParams } from "react-router-dom"
 import {FirstHalf, SecondHalf} from './index.productDetails'
 import { useEffect, useState } from "react"
 import axios, {AxiosResponse} from "axios"
+import { useDispatch } from "react-redux";
+import {setSingleProduct} from '../../features/singleProduct/singleProductSlice'
 
-interface product {
-  _id: number;
+interface Product {
+  id: number;
   title: string;
   image: string;
   price: number;
 }
 
 function ProductDetails() {
-  const [product, setProduct] = useState<product>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-    const {_id} = useParams() 
+    const {_id} = useParams();
+    const dispatch = useDispatch();
+
     useEffect(() => {
       const getProduct = async () => {
         try { 
-          const response: AxiosResponse<product> = await axios.get(`http://localhost:3000/${_id}`)
-          setProduct(response.data)
+          const response: AxiosResponse<Product[]> = await axios.get(`http://localhost:3000/laptops`);
+          const responseArr: Product[] = Array.from(response.data)
+          let product = responseArr.filter((product) => product.id === Number(_id))
+          dispatch(setSingleProduct(product[0]))
         } catch (error) {
           setError('error while fetching a single product')
         }finally {
