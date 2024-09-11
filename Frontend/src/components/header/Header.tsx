@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import seachSvg from  '../../assets/search.svg'
 import downarrowSvg from  '../../assets/downarrow.svg'
+import cartPng from  '../../assets/cart.png'
 import React, { useRef, useState, useEffect } from 'react'
 
 function Header() {
@@ -72,10 +73,19 @@ function Header() {
                 </div>
             </form>
         </div>
-        <div className='text-bg flex gap-4'>
-            <Link to={`/signin`} className='hover:text-bgh transition'>Sign In</Link>
-            <Link to={`/signup`} className='hover:text-bgh transition'>Sign Up</Link>
+        <div className='flex gap-4 items-center -mr-28'>
+            <Link to={`/signin`} className='hover:text-bgh transition text-bg'>Sign In</Link>
+            <Link to={`/signup`} className='hover:text-bgh transition text-bg'>Sign Up</Link>
+            <div className='bg-bg p-2 rounded-md flex gap-4 justify-center items-center'>
+                <div className='border-r border-dashed w-9 h-6'>
+                    <img src={cartPng} className='w-full h-full pr-2'/>
+                </div>
+                <div className='pr-2'>
+                    {10}
+                </div>
+            </div>
         </div>
+        
     </div>
   )
 }
