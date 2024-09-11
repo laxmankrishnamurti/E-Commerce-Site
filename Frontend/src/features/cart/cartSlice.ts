@@ -17,9 +17,15 @@ export const cartProductSlice = createSlice({
     reducers: {
         setCartProduct: (state, action: PayloadAction<CartProduct>) => {
             const existingProductIndex = state.findIndex((product) => product.id === action.payload.id)
-            console.log("existinigProductIndex :" , existingProductIndex)
-
-            state.push(action.payload)
+            
+            if(existingProductIndex !== -1){
+                state[existingProductIndex] = {
+                    ...state[existingProductIndex],
+                    quantity: state[existingProductIndex].quantity + 1
+                }
+            }else {
+                state.push(action.payload)
+            }
         },
         getCartProduct: (state) => {
             return state;

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 
 function Header() {
+    const [totalCartQuantity, setTotalCartQuantity] = useState<number | null>(null)
     const [selectedOption, setSelectedOption] = useState<string>("");
     const [selectWidth, setSelectWidth] = useState<string>("");
     const textRef = useRef<HTMLSpanElement | null>(null);
@@ -23,7 +24,14 @@ function Header() {
         }
       }, [selectedOption]);
 
-      const totalCartProduct = useSelector((state:RootState) => state.cartProduct.length)
+      const CartProduct = useSelector((state:RootState) => state.cartProduct)
+      useEffect(() => {
+        let totalQuantity = 0;
+        CartProduct.forEach((cartItem) => {
+            totalQuantity += cartItem.quantity
+        })
+        setTotalCartQuantity(totalQuantity)
+      }, [CartProduct])
 
   return (
     <div className='w-full min-h-20 bg-hbg flex items-center justify-evenly'>
@@ -86,7 +94,7 @@ function Header() {
                         <img src={cartPng} className='w-full h-full pr-2'/>
                     </div>
                     <div className='pr-2'>
-                        {totalCartProduct}
+                        {totalCartQuantity}
                     </div>
                 </div>
             </Link>
