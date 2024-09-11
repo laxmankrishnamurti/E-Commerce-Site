@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 function ProductShortDescription() {
   const [discountedPrice, setDiscountedPrice] = useState<number>(0)
   const product = useSelector((state: RootState) => state.singleProduct);
+  
   const [rating, setRating] = useState<number>(0);
   const ratingSymbol = "⭐";
 
