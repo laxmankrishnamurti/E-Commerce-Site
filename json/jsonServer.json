@@ -1,127 +1,284 @@
 
 {
     "laptops" :[
-        {"id": 1,
-        "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
-        "title": "Lenovo ideapad slim-3", 
-        "price": 24500, 
-        "rating": 4.2, 
-        "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
+        {
+            "id": 1,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 24500, 
+            "rating": 5, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
+        {
+            "id": 2,
+            "image":"https://m.media-amazon.com/images/I/71vm-E3y70L._AC_UY218_.jpg", 
+            "title": "Lenovo ThinkBook 15 G5 AMD Ryzen 3", 
+            "price": 84900, 
+            "rating": 3.2, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        {"id": 2,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
+        {
+            "id": 3,
+            "image":"https://m.media-amazon.com/images/I/512QAURU1TL._AC_UY218_.jpg", 
+            "title": "Lenovo IdeaPad Slim 3 Intel Core i3-1115G4 11th Gen", 
+            "price": 27800, 
+            "rating": 4.2, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
+        {
+            "id": 4,
+            "image":"https://m.media-amazon.com/images/I/71z1GAqq1uL._AC_UY218_.jpg", 
+            "title": "HP Laptop 15s, AMD Ryzen 5 5500U, 15.6-inch (39.6 cm), FHD, 16GB DDR4, 512GB SSD, AMD Radeon Graphics, 720p HD Camera, Backlit KB, Thin & Light", 
+            "price": 53500, 
+            "rating": 4.8, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        {"id": 3,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
+        {
+            "id": 5,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 95600, 
+            "rating": 3.9, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
+        {
+            "id": 6,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 78500, 
+            "rating": 3.9, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        {"id": 4,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
+        {
+            "id": 7,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 58700, 
+            "rating": 5, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
+        {
+            "id": 8,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 45500, 
+            "rating": 4.7, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         },
-        {"id": 5,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
-        },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
-        },
-        {"id": 6,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
-        },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
-        },
-        {"id": 7,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
-        },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
-        },
-        {"id": 8,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
-        },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
-        },
-        {"id": 9,"image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", "title": "Lenovo ideapad slim-3", "price": 24500, "rating": 4.2, "shortDetails": {
-            "Brand": "Acer",
-            "Model name": "Aspire Lite",
-            "Screen size": "15.6 inches",
-            "colour": "Steel Gray",
-            "CPU Model": "AMD Ryzen 5 5500U",
-            "RAM": "16GB"
-        },
-        "description": {
-            "Manufacturer": "ACER INDIA PRIVATE LIMITED",
-            "Processor Count": 1
-        }
+        {
+            "id": 9,
+            "image":"https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051679244435221.png", 
+            "title": "Lenovo ideapad slim-3", 
+            "price": 55500, 
+            "rating": 2.5, 
+            "shortDetails": {
+                "Brand": "Acer",
+                "Model name": "Aspire Lite",
+                "Screen size": "15.6 inches",
+                "colour": "Steel Gray",
+                "CPU Model": "AMD Ryzen 5 5500U",
+                "RAM": "16GB"
+            },
+            "description": {
+                "Manufacturer": "ACER INDIA PRIVATE LIMITED",
+                "Processor Count": 1,
+                "Series": "Aspire Lite",
+                "Form Factor" : "Ultra-Portable",
+                "Item Height" : "Item Height",
+                "Item Width" : "9 Centimeters",
+                "Standing screen display size" : "15.6 Inches",
+                "Screen Resolution" : "1920 x 1080 pixels",
+                "Batteries" : "1 Lithium Ion batteries required. (included)",
+                "Processor Speed" : "2.1 GHz",
+                "Computer Memory Type" : "DDR4 SDRAM",
+                "Operating System" : "Windows 11 Home",
+                "Country of Origin" : "Ultra-Portable",
+                "Item Weight" : "1 kg 590 g"
+                }
         }
     ]
 }

@@ -71,7 +71,7 @@ function ProductDetails() {
       <div>
         <FirstHalf/>
       </div>
-      <div>
+      <div className="w-full h-fit shadow-lg my-16 rounded-md">
         <SecondHalf/>
       </div>
     </div>
