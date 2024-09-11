@@ -5,6 +5,9 @@ interface Product {
     title: string;
     image: string;
     price: number;
+    rating: number;
+    shortDetails: Record<string, any>;
+    description: Record<string, any>;
 }
 
 //Initialize state as product or null
@@ -12,7 +15,10 @@ const initialState: Product | null = {
     id: 0,
     title: "title",
     image: "image",
-    price: 0
+    price: 0,
+    rating:0,
+    shortDetails: {},
+    description: {},
 };
 
 // const initialState: Product | null =  null;

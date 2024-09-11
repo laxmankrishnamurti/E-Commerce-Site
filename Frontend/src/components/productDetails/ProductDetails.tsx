@@ -24,7 +24,7 @@ interface Product {
   price: number;
   rating: number;
   shortDetails: Record<string, any>;
-  description: Record<string, any>
+  description: Record<string, any>;
 }
 
 function ProductDetails() {

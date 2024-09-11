@@ -43,7 +43,7 @@ function ImagePreview() {
       ))}
     </div>
     {/* Large Image Preview */}
-    <div className='h-fit p-2 bg-gray-200 rounded-md shadow'>
+    <div className='h-fit p-2 bg-gray-200 rounded-md'>
       <img src={hoveredImage} alt="Preview" className={`w-full h-full object-cover ${hoveredClass}`} />
     </div>
   </div>

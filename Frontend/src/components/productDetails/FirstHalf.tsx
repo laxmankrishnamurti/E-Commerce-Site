@@ -8,7 +8,7 @@ function FirstHalf() {
         <div className='w-2/5 h-fit'>
           <ImageContainer/>
         </div>
-        <div>
+        <div className='w-1/2 p-4 h-max'>
           <ProductShortDescription/>
         </div>
         </div>
