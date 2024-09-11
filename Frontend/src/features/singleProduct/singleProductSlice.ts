@@ -6,6 +6,7 @@ interface Product {
     image: string;
     price: number;
     rating: number;
+    discount: number;
     shortDetails: Record<string, any>;
     description: Record<string, any>;
 }
@@ -17,6 +18,7 @@ const initialState: Product | null = {
     image: "image",
     price: 0,
     rating:0,
+    discount: 0,
     shortDetails: {},
     description: {},
 };

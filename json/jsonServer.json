@@ -7,6 +7,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 24500, 
             "rating": 5, 
+            "discount": 6,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -38,6 +39,7 @@
             "title": "Lenovo ThinkBook 15 G5 AMD Ryzen 3", 
             "price": 84900, 
             "rating": 3.2, 
+            "discount": 8,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -69,6 +71,7 @@
             "title": "Lenovo IdeaPad Slim 3 Intel Core i3-1115G4 11th Gen", 
             "price": 27800, 
             "rating": 4.2, 
+            "discount": 7,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -100,6 +103,7 @@
             "title": "HP Laptop 15s, AMD Ryzen 5 5500U, 15.6-inch (39.6 cm), FHD, 16GB DDR4, 512GB SSD, AMD Radeon Graphics, 720p HD Camera, Backlit KB, Thin & Light", 
             "price": 53500, 
             "rating": 4.8, 
+            "discount": 7,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -131,6 +135,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 95600, 
             "rating": 3.9, 
+            "discount": 4,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -162,6 +167,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 78500, 
             "rating": 3.9, 
+            "discount": 3,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -193,6 +199,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 58700, 
             "rating": 5, 
+            "discount": 10,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -224,6 +231,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 45500, 
             "rating": 4.7, 
+            "discount": 11,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",
@@ -255,6 +263,7 @@
             "title": "Lenovo ideapad slim-3", 
             "price": 55500, 
             "rating": 2.5, 
+            "discount": 14,
             "shortDetails": {
                 "Brand": "Acer",
                 "Model name": "Aspire Lite",

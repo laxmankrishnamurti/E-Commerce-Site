@@ -23,6 +23,7 @@ interface Product {
   image: string;
   price: number;
   rating: number;
+  discount: number;
   shortDetails: Record<string, any>;
   description: Record<string, any>;
 }

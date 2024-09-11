@@ -23,29 +23,34 @@ function ImagePreview() {
 
   return (
     <div className=' p-4 flex justify-between gap-8'>
-    {/* Small Image Thumbnails */}
-    <div className='flex flex-col gap-2'>
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className='w-12 h-12 p-1 bg-bg rounded-md hover:cursor-pointer'
-          onMouseEnter={() => {
-            setHoveredImage(image.src);
-            setHoveredClass(image.class);
-          }}
-          onMouseLeave={() => {
-            setHoveredImage(product.image)
-            setHoveredClass("")
-          }}
-        >   
-          <img src={image.src} className={`w-full h-full ${image.class}`} />
-        </div>
-      ))}
-    </div>
-    {/* Large Image Preview */}
-    <div className='h-fit p-2 bg-gray-200 rounded-md'>
-      <img src={hoveredImage} alt="Preview" className={`w-full h-full object-cover ${hoveredClass}`} />
-    </div>
+      {/* Small Image Thumbnails */}
+      <div className='flex flex-col gap-2'>
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className='w-12 h-12 p-1 bg-bg rounded-md hover:cursor-pointer'
+            onMouseEnter={() => {
+              setHoveredImage(image.src);
+              setHoveredClass(image.class);
+            }}
+            onMouseLeave={() => {
+              setHoveredImage(product.image)
+              setHoveredClass("")
+            }}
+          >   
+            <img src={image.src} className={`w-full h-full ${image.class}`} />
+          </div>
+        ))}
+      </div>
+      {/* Large Image Preview */}
+      <div className='h-fit p-2 bg-gray-200 rounded-md flex'>
+        <img src={hoveredImage} alt="Preview" className={`w-full h-full object-cover ${hoveredClass}`} />
+        <div>
+          <span className='text-discount text-lg'>{`-${product.discount}%`}</span>
+          <span className='text-discount text-sm'>Off</span>
+      </div>
+      </div>
+      
   </div>
   )
 }

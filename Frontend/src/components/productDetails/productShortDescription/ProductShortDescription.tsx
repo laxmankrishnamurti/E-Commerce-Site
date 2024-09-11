@@ -3,6 +3,7 @@ import { RootState } from "../../../app/store"
 import { useSelector } from "react-redux"
 
 function ProductShortDescription() {
+  const [discountedPrice, setDiscountedPrice] = useState<number>(0)
   const product = useSelector((state: RootState) => state.singleProduct);
   const [rating, setRating] = useState<number>(0);
   const ratingSymbol = "⭐";
@@ -10,6 +11,7 @@ function ProductShortDescription() {
   useEffect(() => {
     if(product.rating){
       setRating(Math.floor(product.rating))
+      setDiscountedPrice((product.price) - (product.price * product.discount / 100))
     }
   }, [])
 
@@ -22,6 +24,10 @@ function ProductShortDescription() {
       </div>
       <div className="my-2">
         <span>{product.rating} {ratingSymbol.repeat(rating)}</span>
+      </div>
+      <div className="mt-4">
+        <span><del>₹{product.price}</del></span>
+        <span className="mx-4">₹{discountedPrice}</span>
       </div>
       <div className="w-full border border-bg my-4"></div>
         <div className="">
