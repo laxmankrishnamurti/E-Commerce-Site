@@ -12,7 +12,7 @@ function FirstHalf() {
           <ProductShortDescription/>
         </div>
         </div>
-      <div>
+      <div className='w-full flex justify-end'>
         <ActionButton/>
       </div>
     </div>

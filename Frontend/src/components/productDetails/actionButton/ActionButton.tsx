@@ -1,8 +1,7 @@
 
-
 function ActionButton() {
   return (
-    <div className="w-1/2 p-2 float-right flex justify-between">
+    <div className="w-1/2 p-2 flex justify-between">
       <div>
         <button className="px-8 py-2 bg-bg text-text font-semibold hover:bg-bgh rounded-md ">Add to cart</button>
       </div>
