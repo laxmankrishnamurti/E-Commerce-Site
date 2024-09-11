@@ -3,6 +3,8 @@ import seachSvg from  '../../assets/search.svg'
 import downarrowSvg from  '../../assets/downarrow.svg'
 import cartPng from  '../../assets/cart.png'
 import React, { useRef, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../app/store'
 
 function Header() {
     const [selectedOption, setSelectedOption] = useState<string>("");
@@ -20,6 +22,8 @@ function Header() {
           setSelectWidth(`${textRef.current.offsetWidth + 40}px`); // Adding some padding (50px)
         }
       }, [selectedOption]);
+
+      const totalCartProduct = useSelector((state:RootState) => state.cartProduct.length)
 
   return (
     <div className='w-full min-h-20 bg-hbg flex items-center justify-evenly'>
@@ -76,14 +80,16 @@ function Header() {
         <div className='flex gap-4 items-center -mr-28'>
             <Link to={`/signin`} className='hover:text-bgh transition text-bg'>Sign In</Link>
             <Link to={`/signup`} className='hover:text-bgh transition text-bg'>Sign Up</Link>
-            <div className='bg-bg p-2 rounded-md flex gap-4 justify-center items-center'>
-                <div className='border-r border-dashed w-9 h-6'>
-                    <img src={cartPng} className='w-full h-full pr-2'/>
+            <Link to={`/cart`}>
+                <div className='bg-bg p-2 rounded-md flex gap-4 justify-center items-center'>
+                    <div className='border-r border-dashed w-9 h-6'>
+                        <img src={cartPng} className='w-full h-full pr-2'/>
+                    </div>
+                    <div className='pr-2'>
+                        {totalCartProduct}
+                    </div>
                 </div>
-                <div className='pr-2'>
-                    {10}
-                </div>
-            </div>
+            </Link>
         </div>
         
     </div>

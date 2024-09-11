@@ -6,7 +6,7 @@ import {RouterProvider, Route, createBrowserRouter, createRoutesFromElements} fr
 
 import Root from './router/Root.tsx'
 import AuthRoot from './router/AuthRoot.tsx'
-import {Home, Signup, Signin, ProductsComponent, ProductDetails} from './components/index.components.ts'
+import {Home, Signup, Signin, ProductsComponent, ProductDetails, Cart} from './components/index.components.ts'
 
 //Importing store to configure it with react.
 import { Provider } from 'react-redux'
@@ -19,6 +19,7 @@ const router = createBrowserRouter(
         <Route path='/' element={<Home/>}/>
         <Route path='/products/:category' element={<ProductsComponent/>}/>
         <Route path='/products/:category/:_id' element={<ProductDetails/>}/>
+        <Route path='/cart' element={<Cart/>}/>
       </Route>
       <Route element={<AuthRoot/>}>
         <Route path='/signin' element={<Signin/>}/>

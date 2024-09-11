@@ -1,13 +1,16 @@
 import {Filter, Product, Pagination} from './index.products.components'
-import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios, {AxiosResponse} from 'axios'
+import { useParams} from 'react-router-dom'
+
 
 interface Products {
   id: number;
   image: string;
   title: string;
-  price: number
+  price: number;
+  discount: number;
+  quantity: number;
 }
 
 function ProductsComponent() {
@@ -15,7 +18,7 @@ function ProductsComponent() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null)
 
-    let {category} = useParams<{category: string}>()
+  let {category} = useParams<{category: string}>()
     
     useEffect(() => {
       const fetchProducts = async () => {
@@ -58,9 +61,8 @@ function ProductsComponent() {
           <div className='w-4/6 shadow p-4 rounded-md flex flex-wrap justify-between gap-4'>
             {
               products.map((product, index) => (
-                <Link to={`/products/${category}/${product.id}`} key={index} >
-                  <Product product={product}/>
-                </Link>
+                  <Product product={product} key={index}/>
+                
               ))
             }
           </div>

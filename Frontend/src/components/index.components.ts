@@ -5,6 +5,7 @@ import Footer from "./footer/Footer";
 import Home from "./home/Home";
 import ProductsComponent from "./products/ProductsComponent";
 import ProductDetails from "./productDetails/ProductDetails";
+import Cart from "./cart/Cart";
 
 export {
     Signup,
@@ -13,5 +14,6 @@ export {
     Footer,
     Home,
     ProductsComponent,
-    ProductDetails
+    ProductDetails,
+    Cart
 }
