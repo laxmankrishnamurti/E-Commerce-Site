@@ -16,14 +16,9 @@ export const cartProductSlice = createSlice({
     initialState,
     reducers: {
         setCartProduct: (state, action: PayloadAction<CartProduct>) => {
-            if(state.length > 0) {
-                console.log("execution under conditional statement when length is > 0")
-                state.map((product) => {
-                    if(product.id === action.payload.id){
-                        
-                    }
-                })
-            }
+            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id)
+            console.log("existinigProductIndex :" , existingProductIndex)
+
             state.push(action.payload)
         },
         getCartProduct: (state) => {

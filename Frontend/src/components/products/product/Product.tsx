@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {setCartProduct, getCartProduct} from '../../../features/cart/cartSlice'
+import {setCartProduct} from '../../../features/cart/cartSlice'
 import { RootState } from "../../../app/store"
 import { Link } from 'react-router-dom';
 import { useParams} from 'react-router-dom'
@@ -36,7 +36,7 @@ function Product({product}: {product:productType}) {
 
 
   return (
-    <div className="w-56 mb-4 flex flex-col gap-2 shadow p-4 ">
+    <div className="w-56 mb-4 flex flex-col gap-2 shadow p-4">
 
       <Link to={`/products/${category}/${product.id}`}>
         <div className="w-full">
