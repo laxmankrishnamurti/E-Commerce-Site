@@ -20,9 +20,7 @@ export const cartProductSlice = createSlice({
                 console.log("execution under conditional statement when length is > 0")
                 state.map((product) => {
                     if(product.id === action.payload.id){
-                        [...state, {...product, quantity: product.quantity++}]
-                        // product.quantity += 1;
-                        return;
+                        
                     }
                 })
             }
