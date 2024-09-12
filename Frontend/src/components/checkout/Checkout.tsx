@@ -1,8 +1,15 @@
-import React from 'react'
+import {CheckoutHeader, CheckoutBox} from './index.checkout'
 
 function Checkout() {
   return (
-    <div>Checkout</div>
+    <div>
+      <div>
+        <CheckoutHeader/>
+      </div>
+      <div className='w-full flex justify-center items-center h-screen'>
+        <CheckoutBox/>
+      </div>
+    </div>
   )
 }
 
