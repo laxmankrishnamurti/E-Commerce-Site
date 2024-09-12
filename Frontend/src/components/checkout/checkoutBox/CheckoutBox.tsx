@@ -27,7 +27,6 @@ function CheckoutBox() {
             <div className="border border-bg"></div>
             <div className="bg-bg px-4 py-2 my-2 rounded-md">
               <span className="text-sm">Laxman Krishnamurti, Dharamsheela Niwas, Ashok nagar road, Kankarbagh, Patna, Bihar, 800020</span>
-              <button className="text-cta block hover:underline text-sm">Edit address</button>
             </div>
             <div className="ml-2 mb-4">
               <span> + </span>
