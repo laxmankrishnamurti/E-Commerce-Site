@@ -9,6 +9,10 @@ interface CartProduct {
     quantity: number;
 }
 
+interface Quantity {
+    id: number;
+}
+
 const initialState: CartProduct[]  = []
 
 export const cartProductSlice = createSlice({
@@ -16,8 +20,8 @@ export const cartProductSlice = createSlice({
     initialState,
     reducers: {
         setCartProduct: (state, action: PayloadAction<CartProduct>) => {
-            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id)
-            
+            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id);
+        
             if(existingProductIndex !== -1){
                 state[existingProductIndex] = {
                     ...state[existingProductIndex],
@@ -27,11 +31,29 @@ export const cartProductSlice = createSlice({
                 state.push(action.payload)
             }
         },
-        getCartProduct: (state) => {
-            return state;
+        decreaseQuantity: (state, action: PayloadAction<Quantity>) => {
+            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id);
+
+            if(state[existingProductIndex].quantity > 1){
+                state[existingProductIndex] = {
+                    ...state[existingProductIndex], quantity: state[existingProductIndex].quantity - 1
+                }
+            }else {
+                return
+            }
+        },
+        increaseQuantity: (state, action: PayloadAction<Quantity>) => {
+            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id);
+            state[existingProductIndex] = {
+                ...state[existingProductIndex], quantity: state[existingProductIndex].quantity + 1
+            }
+        },
+        deleteCartProduct: (state, action: PayloadAction<Quantity>) => {
+            const existingProductIndex = state.findIndex((product) => product.id === action.payload.id);
+            state.splice(existingProductIndex, 1)
         }
     }
 })
 
-export const {setCartProduct, getCartProduct} = cartProductSlice.actions;
+export const {setCartProduct, decreaseQuantity, increaseQuantity, deleteCartProduct} = cartProductSlice.actions;
 export default cartProductSlice.reducer;
