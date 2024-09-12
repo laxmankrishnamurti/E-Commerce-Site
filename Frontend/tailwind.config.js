@@ -15,7 +15,8 @@ export default {
       attention: "#59114d",
       text: "#012622",
       hbg: "#003b36",
-      helement: "#ece5f0"
+      helement: "#ece5f0",
+      white: "#ffffff"
     },
     extend: {
       fontFamily: {
