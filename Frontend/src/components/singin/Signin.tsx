@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom"
 
 function Signin() {
+
+    // const handleSignInForAdmin = (e) => {
+    //     e.location: String = 'http://localhost:5173/admin'
+    // }
+
   return (
     <>
     <div className="w-full h-screen flex justify-center items-center">
