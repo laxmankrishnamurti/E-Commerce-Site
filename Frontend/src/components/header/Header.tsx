@@ -1,16 +1,24 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import seachSvg from  '../../assets/search.svg'
 import downarrowSvg from  '../../assets/downarrow.svg'
 import cartPng from  '../../assets/cart.png'
+import userPng from  '../../assets/user.png'
 import React, { useRef, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 
 function Header() {
+    const [location, setLocation] = useState<string | null>(null)
     const [totalCartQuantity, setTotalCartQuantity] = useState<number | null>(null)
     const [selectedOption, setSelectedOption] = useState<string>("");
     const [selectWidth, setSelectWidth] = useState<string>("");
     const textRef = useRef<HTMLSpanElement | null>(null);
+
+    const getLocation = useLocation()
+
+    useEffect(() => {
+        setLocation(getLocation.pathname)
+    }, [getLocation])
 
     const options: string[] = ["Books", "Shoes", "Bikes", "Home appliences", "Laptops", "Clothes"]
 
@@ -86,8 +94,20 @@ function Header() {
             </form>
         </div>
         <div className='flex gap-4 items-center -mr-28'>
-            <Link to={`/signin`} className='hover:text-bgh transition text-bg'>Sign In</Link>
-            <Link to={`/signup`} className='hover:text-bgh transition text-bg'>Sign Up</Link>
+            {
+                location === '/admin' ? (
+                    <div className='w-10 mr-8'>
+                        <button>
+                            <img src={userPng} className='w-full'/>
+                        </button>
+                    </div>
+                ) : (
+                    <>
+                        <Link to={`/signin`} className='hover:text-bgh transition text-bg'>Sign In</Link>
+                        <Link to={`/signup`} className='hover:text-bgh transition text-bg'>Sign Up</Link>
+                    </>
+                )
+            }
             <Link to={`/cart`}>
                 <div className='bg-bg p-2 rounded-md flex gap-4 justify-center items-center'>
                     <div className='border-r border-dashed w-9 h-6'>

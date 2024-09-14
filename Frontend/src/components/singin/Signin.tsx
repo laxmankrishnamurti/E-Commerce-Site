@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Signin() {
+    const navigate = useNavigate()
 
-    // const handleSignInForAdmin = (e) => {
-    //     e.location: String = 'http://localhost:5173/admin'
-    // }
+    const handleAdminRoute = () => {
+        navigate('/admin')
+    }
 
   return (
     <>
@@ -24,7 +25,7 @@ function Signin() {
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
-                        <button type="submit" className="bg-cta text-text font-semibold w-full py-2 rounded-md hover:bg-ctah">Continue</button>
+                        <button onClick={handleAdminRoute} type="submit" className="bg-cta text-text font-semibold w-full py-2 rounded-md hover:bg-ctah">Continue</button>
                     </form>
                     <div className="mt-16 mb-8 flex flex-col gap-6">
                         <p className="font-bold text-sm text-text">Don't have an account?</p>
