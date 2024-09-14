@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../../app/store"
-import {setCartProduct} from '../../../features/cart/cartSlice'
+import { RootState } from "../../../app/store";
+import {setCartProduct} from '../../../features/cart/cartSlice';
+import { Link } from "react-router-dom";
 
 function ActionButton() {
   const product = useSelector((state: RootState) => state.singleProduct);
@@ -26,7 +27,9 @@ function ActionButton() {
         <button onClick={handleCartDispatch} className="px-8 py-2 bg-bg text-text font-semibold hover:bg-bgh rounded-md ">Add to cart</button>
       </div>
       <div>
-        <button className="px-8 py-2 bg-cta hover:bg-ctah text-text font-semibold rounded-md">Buy Now</button>
+        <Link to={`/checkout`}>
+            <button className="px-8 py-2 bg-cta hover:bg-ctah text-text font-semibold rounded-md">Buy Now</button>
+        </Link>
       </div>
     </div>
   )
