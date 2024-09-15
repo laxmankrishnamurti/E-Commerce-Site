@@ -1,0 +1,15 @@
+{
+  "name": "shopibackend",
+  "version": "1.0.0",
+  "description": "Creating backend for shopi e-commerce site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Laxman Krishnamurti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.2"
+  }
+}
