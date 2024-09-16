@@ -3,6 +3,7 @@ import express, { Request, Response, urlencoded } from "express";
 import config from "./config/config";
 import connectToDatabase from "./database/connectToDatabase";
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(
   })
 );
 app.use(express.static("public"));
+app.use(cookieParser());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("<h1>Shopi server is running......</h1>");
