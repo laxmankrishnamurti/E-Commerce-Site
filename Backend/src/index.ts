@@ -1,5 +1,5 @@
 require("dotenv").config();
-import express, { Request, Response } from "express";
+import express, { Request, Response, urlencoded } from "express";
 import config from "./config/config";
 import connectToDatabase from "./database/connectToDatabase";
 const cors = require("cors");
@@ -13,6 +13,18 @@ app.use(
     origin: config.cors_origin,
   })
 );
+app.use(
+  express.json({
+    limit: "20kb",
+  })
+);
+app.use(
+  urlencoded({
+    extended: true,
+    limit: "20kb",
+  })
+);
+app.use(express.static("public"));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("<h1>Shopi server is running......</h1>");
