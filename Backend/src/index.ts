@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express";
 require("dotenv").config();
+import express, { Request, Response } from "express";
 import config from "./config/config";
 import connectToDatabase from "./database/connectToDatabase";
 
