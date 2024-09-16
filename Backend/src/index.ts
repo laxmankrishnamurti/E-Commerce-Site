@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
-import dotenv from "dotenv";
+require("dotenv").config();
 import config from "./config/config";
-
-dotenv.config();
+import connectToDatabase from "./database/connectToDatabase";
 
 const app = express();
-const port: number = config.port;
+
+connectToDatabase(config.db_uri);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("<h1>Shopi server is running......</h1>");
