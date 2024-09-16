@@ -344,3 +344,171 @@ The central theme is type safety. TypeScript wants to help us to catch errors du
 ## Practice Regularly:
 
 Writing TypeScript consistently is key to mastering it. The more we work with it, the more intuitive it will become to define types correctly.
+
+# Why we added two more empty objects in request parameter.
+
+```js
+app.post("/user", (req: Request<{}, {}, MyRequestBody>, res: Response) => {
+  // req.body is of type MyRequestBody
+});
+```
+
+### Understanding Express's Request Type
+
+In Express, the Request type is a generic interface that allows us to specify the types of various parts of an HTTP request. This helps TypeScript enforce type safety, ensuring that we handle data correctly.
+
+The Request interface typically looks something like this:
+
+```js
+interface Request<
+  Params = ParamsDictionary,
+  ResBody = any,
+  ReqBody = any,
+  ReqQuery = ParsedQs,
+  Locals = Record<string, any>
+> extends http.IncomingMessage,
+    Express.Request {
+  /* ... */
+}
+```
+
+- Here’s what each generic parameter represents:
+  - Params: The type of the URL parameters (e.g., /user/:id).
+  - ResBody: The type of the response body (usually not needed for the request).
+  - ReqBody: The type of the request body (e.g., data sent in a POST request).
+  - ReqQuery: The type of the query parameters (e.g., /search?term=typescript).
+  - Locals: The type for response locals (advanced usage).
+
+### Why Use Empty Objects {}?
+
+When we want to specify only certain parts of the Request type, we still need to provide placeholders for the generic parameters we’re not customizing. This is why we often see empty objects {} in the type declaration.
+
+```js
+app.post("/user", (req: Request<{}, {}, MyRequestBody>, res: Response) => {
+  // req.body is of type MyRequestBody
+});
+```
+
+- Here's what each part means:
+  - {} for Params: We’re indicating that there are no URL parameters for this route. For example, /user has no :id parameter.
+  - {} for ResBody: This is usually not needed in the request, so you can set it to {} or keep it as any if we don't use it.
+  - MyRequestBody for ReqBody: We’re specifying that the request body should conform to the MyRequestBody interface or type.
+
+### Simplifying Type Declarations
+
+To make our code cleaner and avoid repeatedly specifying empty objects, we can create custom types or type aliases.
+
+<code>Creating a Custom Request Type</code>
+
+- You can create a custom type that pre-defines some of the generic parameters:
+
+```js
+import { Request } from "express";
+
+interface MyRequestBody {
+  name: string;
+  age: number;
+}
+type MyRequest = Request<{}, {}, MyRequestBody>;
+```
+
+Now, we can use MyRequest in our route handlers:
+
+```js
+app.post("/user", (req: MyRequest, res: Response) => {
+  // req.body is of type MyRequestBody
+  const { name, age } = req.body;
+  res.send(`User ${name} is ${age} years old.`);
+});
+```
+
+- Using Partial for Optional Parameters
+  - If we only need to specify certain parts and want others to remain flexible, we can use TypeScript's utility types like Partial. However, with Express's Request, you still need to respect the order of generic parameters.
+
+#### Example :: Complex Structures:
+
+- When dealing with nested objects, function signatures, or generics.
+
+  ```js
+  interface ApiResponse<T> {
+    success: boolean;
+    data: T;
+    error?: string;
+  }
+  const response: ApiResponse<User> = {
+    success: true,
+    data: { name: "Alice", age: 30 },
+  };
+  ```
+
+## Generic interface of Reponse
+
+```js
+interface Response<
+  ResBody = any,
+  Locals extends Record<string, any> = Record<string, any>> extends http.ServerResponse,
+  Express.Response { /* ... */ }
+```
+
+- Example: Typing the Response Body
+
+```js
+import { Request, Response } from "express";
+const express = require("express");
+
+const app = express();
+const port = 3000;
+
+// Define a type for the response body
+interface MyResponseBody {
+  message: string;
+  success: boolean;
+}
+
+app.get("/status", (req: Request, res: Response<MyResponseBody>) => {
+  const response: MyResponseBody = {
+    message: "Server is up and running!",
+    success: true,
+  };
+
+  // TypeScript ensures that 'response' matches MyResponseBody
+  res.json(response);
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+```
+
+## Why Use the Generic Response?
+
+1. Type Safety: By defining the type of the response, TypeScript ensures that we’re sending back the correct structure and data type. This helps catch errors at compile time rather than at runtime.
+
+2. Consistency: It makes our code more predictable by enforcing a consistent response format across our application.
+
+<code>In most cases, we’re sending a JSON response in APIs. Defining a type for this ensures that all fields are correctly set.</code>
+
+```js
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  error?: string;
+}
+
+// Now you can define responses for different endpoints
+app.get(
+  "/user",
+  (req: Request, res: Response<ApiResponse<{ name: string, age: number }>>) => {
+    const user = { name: "John", age: 30 };
+
+    const response: ApiResponse<{ name: string, age: number }> = {
+      success: true,
+      data: user,
+    };
+
+    res.json(response);
+  }
+);
+```
+
+# Central Themes to Remember :: Always think about what types our variables, function parameters, and return values should be. This helps prevent bugs and makes our code more predictable.
