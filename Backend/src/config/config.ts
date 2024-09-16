@@ -4,4 +4,4 @@ const config = {
   cors_origin: String(process.env.CORS_ORIGIN),
 };
 
-export default config;
+module.exports = Object.freeze(config);

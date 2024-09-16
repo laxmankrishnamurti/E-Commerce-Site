@@ -1,6 +1,6 @@
 require("dotenv").config();
 import express, { Request, Response, urlencoded } from "express";
-import config from "./config/config";
+const config = require("./config/config");
 import connectToDatabase from "./database/connectToDatabase";
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
