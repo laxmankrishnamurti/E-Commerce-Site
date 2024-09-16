@@ -1,4 +1,4 @@
-To update an object within an array in Redux Toolkit reducer, you need to ensure that you are returning the updated state correctly. The map method should be used to return a new array, and the mutation of product.quantity should be done immutably. Also, avoid direct mutation of the state. Here's a modified version of your reducer:
+To update an object within an array in Redux Toolkit reducer, we need to ensure that we are returning the updated state correctly. The map method should be used to return a new array, and the mutation of product.quantity should be done immutably. Also, avoid direct mutation of the state. Here's a modified version of the reducer:
 
 ```ts
 setCartProduct: (state, action: PayloadAction<CartProduct>) => {
