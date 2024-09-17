@@ -1,4 +1,3 @@
-console.log("PORT::", process.env.PORT);
 const config = {
   port: Number(process.env.PORT),
   db_uri: String(process.env.MONGODB_URI),
