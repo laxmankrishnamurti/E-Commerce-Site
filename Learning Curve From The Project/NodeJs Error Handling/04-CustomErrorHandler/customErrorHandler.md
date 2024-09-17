@@ -75,7 +75,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
   const newUser = await mongoose.create({});
   if (!newUser) {
     const error = new CustomError("Server side error", 501);
-    next(error);
+    return next(error);
   }
 
   res.send(201).json({
@@ -84,3 +84,5 @@ export const createUser = asyncHandler(async (req, res, next) => {
   });
 });
 ```
+
+Once the Global Error Handling Middleware is called we must call the next(error) function with the return statement because after calling the next function express starts execution the next line of code if we do not use return keyword explicitly.
