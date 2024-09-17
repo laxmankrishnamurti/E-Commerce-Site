@@ -80,3 +80,48 @@ But we need to mark these validation errors or other errors which mongoose is go
   - Password format is not satisfied with the given conditions(Generally done with regex)
   - Email format
   - ...............etc
+
+## Now, the question is how to set these mongoose errors(Non-Operational) error to Operational Error?
+
+In order to do that we'll have to set the "isOperational" property to "true" for those mongoose errors.
+
+<code>There are three types of errors that might be created by mongoose and these errors we need to mark as Operational errors. So that we can send the actual error message to the client when the error occurs.</code>
+
+1. Cast Error
+
+```js
+import CustomError from "./utils/CustomError";
+
+const developmentError = (error, res) => {
+  res.status(error.statusCode).json({
+    status: error.statusCode,
+    message: error.message,
+    stackTrace: error.stack,
+    error: error,
+  });
+};
+
+const castErrorHandler = (error) => {
+  const message = `Invalid value ${error.path} for field ${error.value}`;
+  return new CustomError(message, 400);
+};
+
+module.exports = (error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
+  error.status = error.status || "fail";
+
+  if (process.env.NODE_ENV === "development") {
+    developmentError(error, res);
+  } else if (process.env.NODE_ENV === "production") {
+    // let err = { ...error };
+    if (error.name === "CastError") {
+      error = castErrorHandler(error);
+    }
+    productionError(error, res);
+  }
+};
+```
+
+For checking the error response in production mode set the NODE_ENV to "production"
+
+<code>SET NODE_ENV=production& npm run dev</code>
