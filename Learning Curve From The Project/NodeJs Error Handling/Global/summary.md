@@ -72,3 +72,5 @@ app.all("*", (req, res, next) => {
 YES, so when we pass an argument to the next() function, no matter what the argument is, express will automatically know that there was an error occured in the application.
 
 In that case express will skip all other middleware function which is currently present in the middleware stack and it will directly call the Global Error Handling Middleware function.
+
+<code>Now, we can also call the Global Error Handling Middleware from the controller. But this is not a good practice we can make an Error Class to handle controller error in more efficient way. </code>
