@@ -4,6 +4,15 @@ We should make sure that we are only sending the errors that is usedful for the 
 
 But on the other hand when we are in the development we want to get as much information about the error that has occure as possible. That's because in the development, we can easily know what's going wrong with the application so that we can fix the issue before it becomes bug for the application.
 
+```json
+{
+  "script": {
+    "start": "SET NODE_ENV=production& nodemon ./src/server.ts",
+    "dev": "SET NODE_ENV=development& nodemon ./src/server.ts"
+  }
+}
+```
+
 ```js
 const developmentError = (error, res) => {
   res.status(error.statusCode).json({
