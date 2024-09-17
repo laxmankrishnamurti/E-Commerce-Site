@@ -64,3 +64,23 @@ const asyncHandler = (func) => {
 <code>NOTE ===> When express take the function to run it will give these following arguments :: Request, Response, Next</code>
 
 So that's why we have these paramerters in anonymous function.
+
+## Now, it's time to send CustomError message to the Global Error Handling Middleware using asyncHandler function.
+
+```js
+import CustomError from "./utils/CustomError";
+import asyncHandler from "./utils/asyncHandler";
+
+export const createUser = asyncHandler(async (req, res, next) => {
+  const newUser = await mongoose.create({});
+  if (!newUser) {
+    const error = new CustomError("Server side error", 501);
+    next(error);
+  }
+
+  res.send(201).json({
+    status: "success",
+    message: "User has been created successfully",
+  });
+});
+```
