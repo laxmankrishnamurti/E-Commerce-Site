@@ -151,7 +151,7 @@ Mongoose is build up on top of the MongoDB Drivers and it allow us to communicat
 
 SOLUTION :: By Identifying Error Code. (Handle it same as Cast Error)
 
-### <code>3. Mongoose Validation Error</code>
+### <code>3. Mongoose Validation Error (Errors can be an array of errors)</code>
 
 ### <code>Handle Rejected Promises Error</code>
 
