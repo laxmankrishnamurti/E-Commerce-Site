@@ -87,7 +87,7 @@ In order to do that we'll have to set the "isOperational" property to "true" for
 
 <code>There are three types of errors that might be created by mongoose and these errors we need to mark as Operational errors. So that we can send the actual error message to the client when the error occurs.</code>
 
-1. Cast Error
+### <code>1. Cast Error</code>
 
 ```js
 import CustomError from "./utils/CustomError";
@@ -125,3 +125,19 @@ module.exports = (error, req, res, next) => {
 For checking the error response in production mode set the NODE_ENV to "production"
 
 <code>SET NODE_ENV=production& npm run dev</code>
+
+### <code>Why the destructuring method is not working?</code>
+
+When we are creating a copy of an object using the <code>{...sourceObj}</code> syntax, we have to keep in mind two things. They are :-
+
+1. We are creating a shallow copy and
+2. We will copy only enumerable attributs.
+   - <code>Error.prototype.name</code> is not enumerable therefore it will not be copied into the new object.
+
+### <code>2. Duplicate Error</code>
+
+For this error object we do not have the name property as we are getting in Cast Error that's because this error is not something which is cause by mongoose but instead the underlyne mongodb driver and that's why we do not have the name property.
+
+Mongoose is build up on top of the MongoDB Drivers and it allow us to communicate with mongodb database with ease.
+
+SOLUTION :: By Identifying Error Code. (Handle it same as Cast Error)
