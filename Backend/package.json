@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon",
+    "build": "tsc --project tsconfig.build.json",
+    "dev": "nodemon",
     "start:prod": "node dist/index.js"
   },
   "author": "",

@@ -1,14 +1,15 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
+import "dotenv/config";
+import connectToDatabase from "./database/connectToDatabase.ts";
+import config from "./config/config.ts";
+import { DB_NAME } from "./constants.ts";
+import app from "./app.ts";
 
-dotenv.config();
-
-const app = express();
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("<h1>Server is up and in running state..........</h1>");
-});
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on http://localhost:${process.env.PORT}`);
-});
+connectToDatabase(config.db_uri, DB_NAME)
+  .then(() => {
+    app.listen(config.port, () => {
+      console.log(`app is running on http://localhost:${config.port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Database connection failed. Msg : ", error);
+  });
