@@ -30,7 +30,7 @@ So what we can do?
 
 ```js
 const asyncHandler = (func) => {
-  Promise.resolve(fun()).catch((error) => next(error));
+  func(req, res, next).catch((error) => next(error));
 };
 
 export default asyncHanler;
@@ -56,7 +56,7 @@ So, when express comes with createUser controller function it will give definetl
 ```js
 const asyncHandler = (func) => {
   return (req, res, next) => {
-    Promise.resolve(fun(req, res, next)).catch((error) => next(error));
+    func(req, res, next).catch((error) => next(error));
   };
 };
 ```
