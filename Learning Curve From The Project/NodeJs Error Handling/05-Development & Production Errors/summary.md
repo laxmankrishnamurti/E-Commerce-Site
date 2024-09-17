@@ -150,3 +150,9 @@ For this error object we do not have the name property as we are getting in Cast
 Mongoose is build up on top of the MongoDB Drivers and it allow us to communicate with mongodb database with ease.
 
 SOLUTION :: By Identifying Error Code. (Handle it same as Cast Error)
+
+### <code>3. Mongoose Validation Error</code>
+
+### <code>Handle Rejected Promises Error</code>
+
+### <code>Handle Uncaught_exceptions Error</code>
