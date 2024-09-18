@@ -24,6 +24,11 @@ const orderSchema = new mongoose.Schema({
     enum: ["CONFIRM", "SHIPPED", "DISPATCHED", "DELIVERED"],
     default: "CONFIRM",
   },
+  paymentMethod: {
+    type: String,
+    enum: ["CASH", "CARD"],
+    default: "CASH",
+  },
   products: {
     type: [
       {
