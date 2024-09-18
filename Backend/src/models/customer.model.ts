@@ -18,7 +18,7 @@ const customerSchema = new mongoose.Schema(
     password: {
       type: String,
       min: [6, "Password atleast have 6 characters"],
-      max: 12,
+      max: [12, "Password is too long, max go upto 12 characters"],
       required: true,
     },
     shippingAddress: [
