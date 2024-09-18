@@ -9,7 +9,7 @@ const customerSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: true,
+      unique: [true, "Email is already in use"],
     },
     phoneNumber: {
       type: Number,
@@ -17,19 +17,19 @@ const customerSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      min: [6, "Password atleast have 6 characters"],
-      max: [12, "Password is too long, max go upto 12 characters"],
-      required: true,
+      minlength: [6, "Password atleast have 6 characters"],
+      maxlength: [12, "Password is too long, max go upto 12 characters"],
+      required: [true, "Password is required"],
     },
     shippingAddress: [
       {
         fullName: {
           type: String,
-          required: true,
+          required: [true, "Fullname is required for shipping"],
         },
         mobileNumber: {
           type: Number,
-          required: true,
+          required: [true, "Mobile number is required for shipping"],
         },
         alternateNumber: {
           type: Number,
@@ -42,15 +42,15 @@ const customerSchema = new mongoose.Schema(
         },
         pinCode: {
           type: Number,
-          required: true,
+          required: [true, "PIN Code must required for shipping"],
         },
         city: {
           type: String,
-          required: true,
+          required: [true, "City is required for shipping"],
         },
         state: {
           type: String,
-          required: true,
+          required: [true, "State is required for shipping"],
         },
       },
     ],
