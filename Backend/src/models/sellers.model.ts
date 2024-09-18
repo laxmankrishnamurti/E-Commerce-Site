@@ -19,6 +19,8 @@ const sellerSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: Number,
+      min: [10, "Please enter a valid phone number"],
+      max: [11, "Please enter a valid phone number"],
       required: [true, "Phone number is required"],
     },
     storeName: {
@@ -38,6 +40,7 @@ const sellerSchema = new mongoose.Schema(
         type: String,
         required: [true, "Pan card photo is required"],
       },
+      required: [true, "PAN details are required"],
     },
     accountDetails: {
       accountHolder: {
@@ -52,38 +55,41 @@ const sellerSchema = new mongoose.Schema(
         type: String,
         required: [true, "IFSC code is required"],
       },
+      required: [true, "Account details are required"],
     },
-    pickupAddress: [
-      {
-        pickupStreet: {
-          type: String,
-          required: [true, "Pickup street is required"],
+    pickupAddress: {
+      type: [
+        {
+          pickupStreet: {
+            type: String,
+            required: [true, "Pickup street is required"],
+          },
+          city: {
+            type: String,
+            required: [true, "City is required"],
+          },
+          pinCode: {
+            type: Number,
+            required: [true, "PIN Code is required"],
+          },
+          state: {
+            type: String,
+            required: [true, "State is required"],
+          },
+          shippingMethod: {
+            type: String,
+            enum: ["SHOPI", "SELF"],
+            default: "SHOPI",
+          },
+          shippingFeePrefrences: {
+            type: String,
+            enum: ["CUSTOMER", "SELF"],
+            default: "SELF",
+          },
         },
-        city: {
-          type: String,
-          required: [true, "City is required"],
-        },
-        pinCode: {
-          type: Number,
-          required: [true, "PIN Code is required"],
-        },
-        state: {
-          type: String,
-          required: [true, "State is required"],
-        },
-        shippingMethod: {
-          type: String,
-          enum: ["shopi", "self"],
-          default: "shopi",
-        },
-        shippingFeePrefrences: {
-          type: String,
-          enum: ["customer", "self"],
-          default: "self",
-        },
-        required: [true, "Pick-up address is required"],
-      },
-    ],
+      ],
+      required: [true, "Pickup address is required"], // Ensure the array itself is required
+    },
   },
   { timestamps: true }
 );
