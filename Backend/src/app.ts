@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./utils/customErrorHandler.utils.ts";
 
 const app: Application = express();
@@ -22,6 +23,14 @@ app.use(
     extended: true,
   })
 );
+
+app.use(cookieParser());
+
+// Importing routes
+import sellersRouter from "./routes/sellers.routes.ts";
+
+// Defining routes
+app.use("/api/v1/sellers", sellersRouter);
 
 app.use(globalErrorHandler);
 

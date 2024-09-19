@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 interface IpanDetails {
   panNumber: string;
@@ -53,8 +53,6 @@ const sellerSchema = new mongoose.Schema<ISellers>(
     },
     phoneNumber: {
       type: Number,
-      min: [10, "Please enter a valid phone number"],
-      max: [11, "Please enter a valid phone number"],
       required: [true, "Phone number is required"],
     },
     storeName: {
@@ -74,7 +72,6 @@ const sellerSchema = new mongoose.Schema<ISellers>(
         type: String,
         required: [true, "Pan card photo is required"],
       },
-      required: [true, "PAN details are required"],
     },
     accountDetails: {
       accountHolder: {
@@ -89,7 +86,6 @@ const sellerSchema = new mongoose.Schema<ISellers>(
         type: String,
         required: [true, "IFSC code is required"],
       },
-      required: [true, "Account details are required"],
     },
     pickupAddress: {
       type: [

@@ -1,12 +1,12 @@
 export interface CustomErrorRequestHandler extends Error {
-  statusCode?: number;
-  isOperational?: boolean;
+  statusCode: number;
+  isOperational: boolean;
 }
 
 class CustomErrorClass extends Error {
   statusCode: number;
   isOperational: boolean;
-  constructor(message: string, statusCode: number) {
+  constructor(statusCode: number, message: string) {
     super(message);
     this.statusCode = statusCode;
     this.isOperational = true;
