@@ -1,4 +1,4 @@
-interface CustomErrorRequestHandler extends Error {
+export interface CustomErrorRequestHandler extends Error {
   statusCode?: number;
   isOperational?: boolean;
 }
