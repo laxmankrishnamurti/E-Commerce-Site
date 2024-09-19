@@ -1,3 +1,8 @@
+interface CustomErrorRequestHandler extends Error {
+  statusCode?: number;
+  isOperational?: boolean;
+}
+
 class CustomErrorClass extends Error {
   statusCode: number;
   isOperational: boolean;
