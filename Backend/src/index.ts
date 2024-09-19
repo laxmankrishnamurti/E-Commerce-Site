@@ -7,7 +7,7 @@ import app from "./app.ts";
 connectToDatabase(config.db_uri, DB_NAME)
   .then(() => {
     app.listen(config.port, () => {
-      console.log(`app is running on http://localhost:${config.port}`);
+      console.log(`app is running on port ${config.port}`);
     });
   })
   .catch((error) => {
