@@ -1,6 +1,38 @@
 import mongoose, { Schema } from "mongoose";
 
-const customerSchema = new mongoose.Schema(
+interface IShippingAddress {
+  fullName: string;
+  mobileNumber: number;
+  alternateNumber?: number;
+  streetAddress?: string;
+  landMark?: string;
+  pinCode: number;
+  city: string;
+  state: string;
+}
+
+interface ICartProducts {
+  productId: Schema.Types.ObjectId;
+  quantity: number;
+}
+
+interface IOrderHistory {
+  productId: Schema.Types.ObjectId;
+}
+
+export interface ICustomer extends Document {
+  fullName: string;
+  email: string;
+  phoneNumber: number;
+  password: string;
+  shippingAddress?: IShippingAddress[];
+  cartProducts?: ICartProducts[];
+  orderHistory?: IOrderHistory[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const customerSchema = new mongoose.Schema<ICustomer>(
   {
     fullName: {
       type: String,
@@ -9,7 +41,7 @@ const customerSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: [true, "Email is already in use"],
+      unique: true,
     },
     phoneNumber: {
       type: Number,
@@ -55,6 +87,7 @@ const customerSchema = new mongoose.Schema(
           },
         },
       ],
+      required: false,
     },
     cartProducts: {
       type: [
@@ -76,6 +109,7 @@ const customerSchema = new mongoose.Schema(
           },
         },
       ],
+      required: false,
     },
     orderHistory: {
       type: [
@@ -90,11 +124,16 @@ const customerSchema = new mongoose.Schema(
           },
         },
       ],
+      required: false,
     },
   },
   { timestamps: true }
 );
 
-const CUSTOMER = mongoose.model("customers", customerSchema);
+// Add custom error message for unique index on email
+// customerSchema.path('email').index({ unique: true, message: 'Email is already in use' });
+// Let's handle it on application level ===> Using Global Error Handling Middleware
+
+const CUSTOMER = mongoose.model<ICustomer>("customers", customerSchema);
 
 export default CUSTOMER;
