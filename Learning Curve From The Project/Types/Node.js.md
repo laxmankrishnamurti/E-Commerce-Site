@@ -521,9 +521,10 @@ app.post("/user", (req: MyRequest, res: Response) => {
   };
   ```
 
-# <code>Generics :: Think of it as saying, "I'm going to handle something, but I don't know what kind of thing it will be yet." ===> Flexibility</code>
+# <code>Generics ===> Think of it as saying, "I'm going to handle something, but I don't know what kind of thing it will be yet." ===> Flexibility ===> We use generics when you don't know the exact type at the time of writing the code. It makes our code adaptable.</code>
 
-When we use interface with Generics it means we are actually typing to provide a specific structure.
+- When we use interface with Generics it means we are actually typing to provide a specific structure.
+  - Interfaces with Generics: Once we provide a specific interface (like ResponseOne) to the generic, TypeScript will enforce that the data follows the structure of that interface. It means, if we say T = ResponseOne, TypeScript expects the data to match the User structure exactly.
 
 ## Generic interface of Response
 
