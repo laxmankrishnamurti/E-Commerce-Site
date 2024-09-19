@@ -1,6 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-interface IShippingAddress {
+interface IshippingAddress {
   fullName: string;
   mobileNumber: number;
   alternateNumber?: number;
@@ -11,28 +11,28 @@ interface IShippingAddress {
   state: string;
 }
 
-interface ICartProducts {
+interface IcartProducts {
   productId: Schema.Types.ObjectId;
   quantity: number;
 }
 
-interface IOrderHistory {
+interface IorderHistory {
   productId: Schema.Types.ObjectId;
 }
 
-export interface ICustomer extends Document {
+export interface ICustomers extends Document {
   fullName: string;
   email: string;
   phoneNumber: number;
   password: string;
-  shippingAddress?: IShippingAddress[];
-  cartProducts?: ICartProducts[];
-  orderHistory?: IOrderHistory[];
+  shippingAddress?: IshippingAddress[];
+  cartProducts?: IcartProducts[];
+  orderHistory?: IorderHistory[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const customerSchema = new mongoose.Schema<ICustomer>(
+const customerSchema = new mongoose.Schema<ICustomers>(
   {
     fullName: {
       type: String,
@@ -134,6 +134,6 @@ const customerSchema = new mongoose.Schema<ICustomer>(
 // customerSchema.path('email').index({ unique: true, message: 'Email is already in use' });
 // Let's handle it on application level ===> Using Global Error Handling Middleware
 
-const CUSTOMER = mongoose.model<ICustomer>("customers", customerSchema);
+const CUSTOMER = mongoose.model<ICustomers>("customers", customerSchema);
 
 export default CUSTOMER;

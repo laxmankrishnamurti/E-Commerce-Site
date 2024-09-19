@@ -1,6 +1,33 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-const orderSchema = new mongoose.Schema({
+interface Iproducts {
+  productId: Schema.Types.ObjectId;
+  quantity: number;
+}
+
+interface IshippingAddress {
+  fullName: string;
+  mobileNumber: number;
+  alternateNumber?: number;
+  streetAddress?: string;
+  landMark?: string;
+  pinCode: number;
+  city: string;
+  state: string;
+}
+
+export interface IOrders extends Document {
+  orderId: string;
+  customerId: Schema.Types.ObjectId;
+  sellerId: Schema.Types.ObjectId;
+  orderDate: Date;
+  status: "CONFIRM" | "SHIPPED" | "DISPATCHED" | "DELIVERED";
+  paymentMethod: "CASH" | "CARD";
+  products: Iproducts[];
+  shippingAddress: IshippingAddress;
+}
+
+const orderSchema = new mongoose.Schema<IOrders>({
   orderId: {
     type: String,
     required: [true, "Order id is required"],
@@ -78,6 +105,6 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-const ORDER = mongoose.model("orders", orderSchema);
+const ORDER = mongoose.model<IOrders>("orders", orderSchema);
 
 export default ORDER;

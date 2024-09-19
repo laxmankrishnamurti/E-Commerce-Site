@@ -1,6 +1,38 @@
 import mongoose from "mongoose";
 
-const sellerSchema = new mongoose.Schema(
+interface IpanDetails {
+  panNumber: string;
+  panHolder: string;
+  panPhoto: string;
+}
+
+interface IaccountDetails {
+  accountHolder: string;
+  accountNumber: number;
+  ifscCode: string;
+}
+
+interface IpickupAddress {
+  pickupStreet: string;
+  city: string;
+  pinCode: number;
+  state: string;
+  shippingMethod: "SHOPI" | "SELF";
+  shippingFeePrefrences: "CUSTOMER" | "SELF";
+}
+
+export interface ISellers extends Document {
+  fullName: string;
+  email: string;
+  password: string;
+  phoneNumber: number;
+  storeName: string;
+  panDetails: IpanDetails;
+  accountDetails: IaccountDetails;
+  pickupAddress: IpickupAddress[];
+}
+
+const sellerSchema = new mongoose.Schema<ISellers>(
   {
     fullName: {
       type: String,
@@ -9,7 +41,7 @@ const sellerSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: [true, "Email is already in use"],
+      unique: true,
     },
     password: {
       type: String,
@@ -94,6 +126,6 @@ const sellerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const SELLER = mongoose.model("sellers", sellerSchema);
+const SELLER = mongoose.model<ISellers>("sellers", sellerSchema);
 
 export default SELLER;
