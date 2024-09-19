@@ -1,4 +1,4 @@
-class ErrorHandler extends Error {
+class CustomErrorClass extends Error {
   statusCode: number;
   isOperational: boolean;
   constructor(message: string, statusCode: number) {
@@ -9,4 +9,4 @@ class ErrorHandler extends Error {
   }
 }
 
-export default ErrorHandler;
+export default CustomErrorClass;
