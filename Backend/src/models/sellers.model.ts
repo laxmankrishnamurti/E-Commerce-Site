@@ -30,6 +30,8 @@ export interface ISellers extends Document {
   panDetails: IpanDetails;
   accountDetails: IaccountDetails;
   pickupAddress: IpickupAddress[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const sellerSchema = new mongoose.Schema<ISellers>(

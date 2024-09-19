@@ -7,6 +7,8 @@ export interface IProducts extends Document {
   discount: number;
   category: string;
   productDescription: Record<string, string>;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const productSchema = new mongoose.Schema<IProducts>(

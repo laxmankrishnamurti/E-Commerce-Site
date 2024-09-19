@@ -16,10 +16,6 @@ interface IcartProducts {
   quantity: number;
 }
 
-interface IorderHistory {
-  productId: Schema.Types.ObjectId;
-}
-
 export interface ICustomers extends Document {
   fullName: string;
   email: string;
@@ -27,7 +23,6 @@ export interface ICustomers extends Document {
   password: string;
   shippingAddress?: IshippingAddress[];
   cartProducts?: IcartProducts[];
-  orderHistory?: IorderHistory[];
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -105,21 +100,6 @@ const customerSchema = new mongoose.Schema<ICustomers>(
             required: [
               true,
               "Product Quantity is required to add products into cart product",
-            ],
-          },
-        },
-      ],
-      required: false,
-    },
-    orderHistory: {
-      type: [
-        {
-          productId: {
-            type: Schema.Types.ObjectId,
-            ref: "products",
-            required: [
-              true,
-              "Product id is required to add products into order histroy",
             ],
           },
         },

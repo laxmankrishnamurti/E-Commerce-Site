@@ -25,6 +25,8 @@ export interface IOrders extends Document {
   paymentMethod: "CASH" | "CARD";
   products: Iproducts[];
   shippingAddress: IshippingAddress;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const orderSchema = new mongoose.Schema<IOrders>({
@@ -103,7 +105,7 @@ const orderSchema = new mongoose.Schema<IOrders>({
       required: [true, "State is required for shipping"],
     },
   },
-});
+}, {timestamps: true});
 
 const ORDER = mongoose.model<IOrders>("orders", orderSchema);
 
