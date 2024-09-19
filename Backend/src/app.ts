@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import { globalErrorHandler } from "./utils/customErrorHandler.utils";
 
 const app: Application = express();
 
@@ -21,5 +22,7 @@ app.use(
     extended: true,
   })
 );
+
+app.use(globalErrorHandler);
 
 export default app;

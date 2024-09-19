@@ -430,6 +430,10 @@ app.post("/user", (req: MyRequest, res: Response) => {
 - When dealing with nested objects, function signatures, or generics.
 
   ```js
+  interface User {
+    name: string;
+    age: number;
+  }
   interface ApiResponse<T> {
     success: boolean;
     data: T;
@@ -441,7 +445,87 @@ app.post("/user", (req: MyRequest, res: Response) => {
   };
   ```
 
-## Generic interface of Reponse
+### <code>Let's discuss how it works?</code>
+
+- Central Theme ===> We want to send a response and we are trying to send a generic response. We have couple of ways to do this
+
+  1. Make a single constant interface. Like this:-
+
+  ```ts
+  interface DataObject{
+    name: string;
+    age: number;
+  }
+  interface ApiResponse {
+    success: boolean;
+    data: DataObject[];
+    error?. string;
+  }
+  const response: ApiResponse = {
+    success: true,
+    data: {
+      [
+        {
+          name: "Laxman Krishnamurti",
+          age: 21
+        },
+        {
+          name: "Kawya Krishnamurti",
+          age: 6
+        },
+        {
+          name: "Pritilata Wadedar",
+          age: 19
+        }
+      ]
+    }
+  }
+  ```
+
+  2. Using Generics for full flexibility
+
+  ```ts
+  interface ApiResponse<T> {
+    success: boolean;
+    data: T; // Dynamic type based on the input
+    error?: string;
+  }
+
+  interface ResponseOne {
+    name: string;
+    age: number;
+  }
+  interface ResponseTwo {
+    users: ResponseOne[];
+  }
+  interface ResponseThree {
+    title: string;
+    description: Record<string, string>;
+  }
+  const response1: ApiResponse<ResponseOne> = {
+    success: true,
+    data: { name: "Laxman Krishnamurti", age: 21 },
+  };
+  const response2: ApiResponse<ResponseTwo> = {
+    success: true,
+    data: {
+      users: [
+        { name: "Kawya Krishnamurti", age: 6 },
+        { name: "Pritilata Wadedar", age: 19 },
+      ],
+    },
+  };
+  const response3: ApiResponse<ResponseThree> = {
+    success: true,
+    data: { title: "Product Title", description: "Product description" },
+  };
+  ```
+
+# <code>Generics :: Think of it as saying, "I'm going to handle something, but I don't know what kind of thing it will be yet." ===> Flexibility</code>
+
+When we use interface with Generics it means we are actually typing to provide a specific structure.
+
+## Generic interface of Response
 
 ```js
 interface Response<
