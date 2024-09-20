@@ -25,3 +25,21 @@ Applications running in Node.js will generally experience four categories of err
 - All JavaScript errors are handled as exceptions that immediately generate and throw an error using the standard JavaScript throw mechanism. These are handled using the try…catch construct provided by the JavaScript language.
 
 - Any use of the JavaScript throw mechanism will raise an exception that must be handled or the Node.js process will exit immediately.
+
+### 1. Error Propagation in Express:
+
+- Whether the error is thrown by our application logic (in controllers, middleware, etc.) or by an external source (like a database error from MongoDB or Mongoose), Express will pass that error to the global error handler (if one exists).
+
+- Express doesn’t care where the error comes from. It just forwards the error down the middleware chain.
+
+### 2. Global Error Handler Role:
+
+- In the global error handler, we are responsible for inspecting the error to determine its source.
+
+- Based on this inspection (e.g., checking error properties like err.name, err.code, or custom properties we might define), we can classify whether the error comes from our application (controller/middleware) or an external source (like the database).
+
+### 3. Appropriate Response:
+
+- Once we’ve identified the type of error, we need to send the appropriate response to the client as an API response. This could include:
+  - Setting the correct HTTP status code (e.g., 400 for validation errors, 500 for internal server errors).
+  - Sending a meaningful error message that helps the client understand what went wrong (e.g., Invalid input data, Database connection failed).
