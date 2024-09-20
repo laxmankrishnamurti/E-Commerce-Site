@@ -5,7 +5,7 @@ const asyncHandler = (
     req: Request,
     Res: Response,
     next: NextFunction
-  ) => Promise<void | Response>
+  ) => Promise<Response | void>
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
     func(req, res, next).catch((error: ErrorRequestHandler) => next(error));
