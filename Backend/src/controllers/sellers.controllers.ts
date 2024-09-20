@@ -7,6 +7,7 @@ import CustomErrorClass from "../utils/customErrorClass.utils.ts";
 const newSellerHandler = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const data: ISellers = req.body;
+    console.log("data :: ", data);
 
     const newSeller = await SELLER.create({
       ...data,

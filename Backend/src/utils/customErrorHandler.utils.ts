@@ -11,6 +11,7 @@ export const globalErrorHandler = (
   error.statusCode = error.statusCode || 500;
   error.message = error.message || "fail";
   res.status(error.statusCode).json({
+    errorStack: error,
     status: error.statusCode,
     message: error.message,
   });
