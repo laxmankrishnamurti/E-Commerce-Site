@@ -13,10 +13,7 @@ const sellerSchema = Joi.object({
     "string.email": "Please enter a valid email address",
   }),
   password: Joi.string().min(6).max(12).required(),
-  phoneNumber: Joi.number().required().messages({
-    "any.required": "Phone number is required",
-    "number.base": "Phone number must be a number",
-  }),
+  phoneNumber: Joi.number().required(),
   storeName: Joi.string().required(),
   panDetails: Joi.object({
     panNumber: Joi.string().required(),
@@ -62,8 +59,12 @@ const newSellerHandler = asyncHandler(
       });
     }
 
-    let err = new CustomErrorClass(500, "Internal server error");
-    return next(err);
+    return next(
+      new CustomErrorClass(
+        500,
+        "Internal server error, Please try after some time"
+      )
+    );
   }
 );
 
