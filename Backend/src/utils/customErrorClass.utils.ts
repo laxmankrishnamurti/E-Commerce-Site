@@ -2,6 +2,7 @@
 export interface CustomErrorRequestHandler extends Error {
   statusCode: number;
   isOperational: boolean;
+  code: number;
 }
 
 // For sending custom error

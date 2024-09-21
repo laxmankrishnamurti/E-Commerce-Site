@@ -4,13 +4,19 @@ import { CustomErrorRequestHandler } from "./customErrorClass.utils.ts";
 const developmentError = (error: CustomErrorRequestHandler, res: Response) => {
   res.status(error.statusCode).json({
     statusCode: error.statusCode,
-    errorStack: error
-  })
+    errorStack: error,
+  });
 };
 
 const productionError = (error: CustomErrorRequestHandler, res: Response) => {
-  console.log(error)
-}
+  if (error.code === 11000) {
+    res.status(error.statusCode).json({
+      status: "fail",
+      message:
+        "The email you have provided is already associated with an account.",
+    });
+  }
+};
 
 export const globalErrorHandler = (
   error: CustomErrorRequestHandler,
@@ -22,10 +28,10 @@ export const globalErrorHandler = (
 
   if (process.env.NODE_ENV === "development") {
     console.log("Node Environment : ", process.env.NODE_ENV);
-    developmentError(error, res)
+    developmentError(error, res);
   } else if (process.env.NODE_ENV === "production") {
     console.log("Node Environment : ", process.env.NODE_ENV);
-    productionError(error, res)
+    productionError(error, res);
   }
 
   res.json({
