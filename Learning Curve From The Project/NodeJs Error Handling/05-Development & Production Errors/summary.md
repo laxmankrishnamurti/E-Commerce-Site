@@ -51,7 +51,7 @@ import globalErrorHandlerMiddleware from "./utils/globalErrorHandlerMiddlewar";
 app.use(globalErrorHandlerMiddleware);
 ```
 
-Most of the errors which we are going to create in our app is going to create using the CustomError Class so in that case it will help this "isOperational" property and that will be set to true. So in that case we want to send the productionError Response.
+Most of the errors which we are going to create in our application is going to use the CustomError Class so in that case it will help this "isOperational" property and that will be set to true. So in that case we want to send the productionError Response.
 
 But for other errors(which is created by mongoose) this "isOperational" is not to set. So, in that case we'll not have "isOperational" property on the error object. In that case we want to send another response.
 

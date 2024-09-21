@@ -4,16 +4,36 @@ import { CustomErrorRequestHandler } from "./customErrorClass.utils.ts";
 const developmentError = (error: CustomErrorRequestHandler, res: Response) => {
   res.status(error.statusCode).json({
     statusCode: error.statusCode,
-    errorStack: error,
+    message: error.message,
+    errorStack: error.stack,
+    error: error,
   });
 };
 
 const productionError = (error: CustomErrorRequestHandler, res: Response) => {
-  if (error.code === 11000) {
+  if (error.isOperational) {
     res.status(error.statusCode).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+
+  if (error.code === 11000) {
+    res.status(409).json({
       status: "fail",
       message:
         "The email you have provided is already associated with an account.",
+    });
+  }
+
+  // Handling MONGODB_CastError
+  const key = Object.keys(error.errors)[0];
+  if (error.errors[key].name === "CastError") {
+    const message = `Invalid value ${error.errors[key].value} for ${error.errors[key].path}`;
+
+    res.status(400).json({
+      status: "fail",
+      message: message,
     });
   }
 };
@@ -27,14 +47,8 @@ export const globalErrorHandler = (
   error.statusCode = error.statusCode || 500;
 
   if (process.env.NODE_ENV === "development") {
-    console.log("Node Environment : ", process.env.NODE_ENV);
     developmentError(error, res);
   } else if (process.env.NODE_ENV === "production") {
-    console.log("Node Environment : ", process.env.NODE_ENV);
     productionError(error, res);
   }
-
-  res.json({
-    error: error,
-  });
 };
