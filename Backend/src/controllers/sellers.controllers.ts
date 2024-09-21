@@ -3,6 +3,7 @@ import Joi from "joi";
 import asyncHandler from "../utils/asyncHandler.utils.ts";
 import SELLER from "../models/sellers.model.ts";
 import { ISellers } from "../models/sellers.model.ts";
+import { generateToken } from "../utils/cookieHandler,utils.ts";
 
 //Joi schema to validate the request body
 const sellerSchema = Joi.object({
@@ -54,6 +55,12 @@ const newSellerHandler = asyncHandler(
       pickupAddress: [data.pickupAddress],
     });
 
+    // Generating a jsonwebtoekn
+    const token: string = generateToken({
+      userId: String(newSeller._id)
+    })
+
+    res.cookie("accessToken", token)
     if (newSeller) {
       return res.status(201).json({
         status: "success",
