@@ -47,9 +47,9 @@ export const createUser = asyncHandler(async (req, res, next) => {
 
 If there is any error occured in the controller it will automatically catched by catch block which we have written in Promise state if the promise will get rejected.
 
-### <code>But, There was a problem with the asyncHandler is that it is not actually a function itself. Just watch carefully it is actually returning a Promise not a function and we know that express requires a function to run whenever route is matched.</code>
+### <code>But, There was a problem with the asyncHandler, is that it is not actually a function itself. Just watch carefully it is actually returning a Promise not a function and we know that express requires a function to run whenever route is matched.</code>
 
-So, when express comes with createUser controller function it will give definetly gives an error that it is not a function. So, what is the solution.................?
+So, when express comes with createUser controller function it will definetly gives an error that it is not a function. So, what is the solution.................?
 
 <code>SOLUTION :: Return an anonymous function to make sure express will have a function to call whenever the router will match. So, the asyncHandler function will look like this :- </code>
 

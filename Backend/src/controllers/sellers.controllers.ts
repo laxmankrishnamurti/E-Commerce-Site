@@ -41,7 +41,11 @@ const newSellerHandler = asyncHandler(
 
     //Stoping further execution if a required field is missing in the req.body
     if (error) {
-      return next(error);
+      return res.status(400).json({
+        status: "fail",
+        message: error.details[0].message,
+        errorStack: error,
+      });
     }
 
     //Casting the vlaue to TypeScript interface
@@ -55,7 +59,7 @@ const newSellerHandler = asyncHandler(
     if (newSeller) {
       return res.status(201).json({
         status: "success",
-        data: newSeller,
+        message: "The account has been created successfully",
       });
     }
 

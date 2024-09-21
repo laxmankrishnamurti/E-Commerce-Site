@@ -1,18 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import { CustomErrorRequestHandler } from "./customErrorClass.utils.ts";
 
+const developmentError = (erro: CustomErrorRequestHandler, res: Response) => {};
+
 export const globalErrorHandler = (
   error: CustomErrorRequestHandler,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log("Error : ", error);
   error.statusCode = error.statusCode || 500;
-  error.message = error.message || "fail";
-  res.status(error.statusCode).json({
-    errorStack: error,
-    status: error.statusCode,
-    message: error.message,
+
+  if (process.env.NODE_ENV === "development") {
+    console.log("Node Environment : ", process.env.NODE_ENV);
+  } else if (process.env.NODE_ENV === "production") {
+    console.log("Node Environment : ", process.env.NODE_ENV);
+  }
+
+  res.json({
+    error: error,
   });
 };
