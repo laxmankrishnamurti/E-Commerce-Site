@@ -62,12 +62,7 @@ const newSellerHandler = asyncHandler(
       });
     }
 
-    return next(
-      new CustomErrorClass(
-        500,
-        "Internal server error, Please try after some time"
-      )
-    );
+    return next(error);
   }
 );
 
