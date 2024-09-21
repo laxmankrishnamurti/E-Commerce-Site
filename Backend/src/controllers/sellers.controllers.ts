@@ -8,9 +8,15 @@ import CustomErrorClass from "../utils/customErrorClass.utils.ts";
 //Joi schema to validate the request body
 const sellerSchema = Joi.object({
   fullName: Joi.string().required(),
-  email: Joi.string().email().required(),
+  email: Joi.string().email().required().messages({
+    "any.required": "Email is required",
+    "string.email": "Please enter a valid email address",
+  }),
   password: Joi.string().min(6).max(12).required(),
-  phoneNumber: Joi.number().required(),
+  phoneNumber: Joi.number().required().messages({
+    "any.required": "Phone number is required",
+    "number.base": "Phone number must be a number",
+  }),
   storeName: Joi.string().required(),
   panDetails: Joi.object({
     panNumber: Joi.string().required(),
