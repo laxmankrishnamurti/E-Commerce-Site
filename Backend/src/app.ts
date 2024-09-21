@@ -1,9 +1,17 @@
 import express, { Application } from "express";
+import rateLimit from "express-rate-limit";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./utils/customErrorHandler.utils.ts";
 
 const app: Application = express();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
 
 app.use(
   cors({

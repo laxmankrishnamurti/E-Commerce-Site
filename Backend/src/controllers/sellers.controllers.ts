@@ -40,14 +40,15 @@ const sellerSchema = Joi.object({
 
 const newSellerHandler = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { error } = sellerSchema.validate(req.body);
+    const { error, value } = sellerSchema.validate(req.body);
 
+    //Stoping further execution if a required field is missing from the req.body
     if (error) {
-      return next(new CustomErrorClass(400, error.details[0].message));
+      return next(error);
     }
 
-    const data: ISellers = req.body;
-    console.log("data :: ", data);
+    //Casting the vlaue to TypeScript interface
+    const data: ISellers = value as ISellers;
 
     const newSeller = await SELLER.create({
       ...data,
