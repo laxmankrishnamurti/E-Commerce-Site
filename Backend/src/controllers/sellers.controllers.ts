@@ -42,7 +42,7 @@ const newSellerHandler = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = sellerSchema.validate(req.body);
 
-    //Stoping further execution if a required field is missing from the req.body
+    //Stoping further execution if a required field is missing in the req.body
     if (error) {
       return next(error);
     }
