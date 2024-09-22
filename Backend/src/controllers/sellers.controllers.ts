@@ -57,10 +57,11 @@ const newSellerHandler = asyncHandler(
 
     // Generating a jsonwebtoekn
     const token: string = generateToken({
-      userId: String(newSeller._id)
-    })
+      userId: String(newSeller._id),
+    });
 
-    res.cookie("accessToken", token)
+    // Sending access token
+    res.cookie("accessToken", token);
     if (newSeller) {
       return res.status(201).json({
         status: "success",
