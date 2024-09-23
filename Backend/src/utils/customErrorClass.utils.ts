@@ -3,6 +3,9 @@ export interface CustomErrorRequestHandler extends Error {
   statusCode: number;
   isOperational: boolean;
   code: number;
+  name: string;
+  value: string;
+  path: string;
   errors: Record<string, any>;
 }
 

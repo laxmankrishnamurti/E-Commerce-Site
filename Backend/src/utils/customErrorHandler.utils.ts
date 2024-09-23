@@ -26,16 +26,17 @@ const productionError = (error: CustomErrorRequestHandler, res: Response) => {
     });
   }
 
-  // Handling MONGODB_CastError
-  const key = Object.keys(error.errors)[0];
-  if (error.errors[key].name === "CastError") {
-    const message = `Invalid value ${error.errors[key].value} for ${error.errors[key].path}`;
-
+  if (error.name === "CastError") {
+    const message = `Invalid value ${error.value} for ${error.path}`;
     res.status(400).json({
       status: "fail",
       message: message,
     });
   }
+
+  res.json({
+    ErrorStack: error,
+  });
 };
 
 export const globalErrorHandler = (

@@ -66,6 +66,7 @@ const createNewSellerAccount = asyncHandler(
       return res.status(201).json({
         status: "success",
         message: "The account has been created successfully",
+        account_id: newSeller._id,
       });
     }
 

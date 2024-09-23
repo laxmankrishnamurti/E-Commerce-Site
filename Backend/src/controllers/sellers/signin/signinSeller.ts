@@ -51,6 +51,7 @@ const signinSeller = asyncHandler(
     return res.status(200).json({
       status: "success",
       message: "Login successful",
+      account_id: user._id,
     });
   }
 );
