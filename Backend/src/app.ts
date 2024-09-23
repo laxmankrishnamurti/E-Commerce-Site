@@ -4,6 +4,12 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import { globalErrorHandler } from "./utils/customErrorHandler.utils.ts";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Simulation of __dirname in ES6
+const __fileName = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__fileName);
 
 const app: Application = express();
 
@@ -22,6 +28,9 @@ app.use(
     credentials: true,
   })
 );
+
+// const dir = path.resolve(__dirname, "..", "public");
+app.use("/public", express.static(path.resolve(__dirname, "..", "public")));
 
 app.use(
   express.json({
