@@ -20,7 +20,6 @@ const generateToken = (payload: IPayload): string => {
 };
 
 const verifyToken = (token: string): IPayload => {
-  console.log("input token  : ", token);
   const result = jsonwebtoken.verify(token, config.jsonwebtoken_secret);
 
   if (typeof result === "string") {
