@@ -4,13 +4,18 @@ import {
   signinSeller,
   getAccountDetails,
   updateAccountDetails,
-  deleteAccount
+  deleteAccount,
 } from "../controllers/sellers/index.sellerController.ts";
+import fileHandler from "../utils/fileHandler.utils.ts";
 
 const router: Router = expres.Router();
 
-router.route("/").post(createNewSellerAccount);
+router.route("/").post(fileHandler.single("panPhoto"), createNewSellerAccount);
 router.route("/signin").post(signinSeller);
-router.route("/:sellerId").get(getAccountDetails).patch(updateAccountDetails).delete(deleteAccount);
+router
+  .route("/:sellerId")
+  .get(getAccountDetails)
+  .patch(updateAccountDetails)
+  .delete(deleteAccount);
 
 export default router;

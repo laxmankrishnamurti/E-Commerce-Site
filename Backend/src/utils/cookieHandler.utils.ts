@@ -20,22 +20,14 @@ const generateToken = (payload: IPayload): string => {
 };
 
 const verifyToken = (token: string): IPayload => {
-  try {
-    const result = jsonwebtoken.verify(token, config.jsonwebtoken_secret);
+  console.log("input token  : ", token);
+  const result = jsonwebtoken.verify(token, config.jsonwebtoken_secret);
 
-    if (typeof result === "string") {
-      throw new CustomErrorClass(400, "Invalid token format");
-    }
-
-    return result as IPayload;
-  } catch (error) {
-    if (error instanceof jsonwebtoken.JsonWebTokenError) {
-      throw new CustomErrorClass(401, "Invalid or expired token");
-    } else {
-      // Rethrow any other errors (possibly internal server errors)
-      throw error;
-    }
+  if (typeof result === "string") {
+    throw new CustomErrorClass(400, "Invalid token");
   }
+
+  return result as IPayload;
 };
 
 export { generateToken, verifyToken };

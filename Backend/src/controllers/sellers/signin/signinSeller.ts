@@ -47,7 +47,7 @@ const signinSeller = asyncHandler(
     const token: string = generateToken({ userId: String(user._id) });
 
     // Sending access token
-    res.cookie("accessToken", token);
+    res.cookie("a_tkn", token);
     return res.status(200).json({
       status: "success",
       message: "Login successful",
