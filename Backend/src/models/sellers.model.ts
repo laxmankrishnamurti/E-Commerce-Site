@@ -1,6 +1,5 @@
-import { NextFunction } from "express";
 import mongoose, { Document } from "mongoose";
-import {passwordEncryptionHandler} from "../utils/passwordHandler.utils"
+import { passwordEncryptionHandler } from "../utils/passwordHandler.utils.ts";
 
 interface IpanDetails {
   panNumber: string;
@@ -126,19 +125,18 @@ const sellerSchema = new mongoose.Schema<ISellers>(
   { timestamps: true }
 );
 
-
-sellerSchema.pre<ISellers>("save", async function(next: NextFunction) {
-  const seller = this as ISellers
+sellerSchema.pre<ISellers>("save", async function (next) {
+  const seller = this;
 
   if (!seller.isModified("password")) {
-      return next();
-  } else {
-      try {
-          this.password = await passwordEncryptionHandler(this.password);
-          return next();
-      } catch (error) {
-          return next(error);
-      }
+    return next();
+  }
+
+  try {
+    seller.password = await passwordEncryptionHandler(seller.password);
+    next();
+  } catch (error) {
+    next(error as Error);
   }
 });
 
