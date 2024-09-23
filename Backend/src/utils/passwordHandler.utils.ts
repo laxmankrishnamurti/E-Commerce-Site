@@ -19,13 +19,8 @@ const passwordEncryptionHandler = async (
 const passwordDecryptionHandler = (
   plainPassword: string,
   hashedPassword: string
-) => {
-  bcrypt.compare(plainPassword, hashedPassword, function (error, result) {
-    if (error) {
-      throw new CustomErrorClass(500, "Password validation error by bcrypt");
-    }
-    return result;
-  });
+): Promise<boolean> => {
+  return bcrypt.compare(plainPassword, hashedPassword);
 };
 
 export { passwordEncryptionHandler, passwordDecryptionHandler };

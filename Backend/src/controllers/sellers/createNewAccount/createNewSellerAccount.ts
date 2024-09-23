@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
-import asyncHandler from "../utils/asyncHandler.utils.ts";
-import SELLER from "../models/sellers.model.ts";
-import { ISellers } from "../models/sellers.model.ts";
-import { generateToken } from "../utils/cookieHandler.utils.ts";
+import asyncHandler from "../../../utils/asyncHandler.utils.ts";
+import SELLER from "../../../models/sellers.model.ts";
+import { ISellers } from "../../../models/sellers.model.ts";
+import { generateToken } from "../../../utils/cookieHandler.utils.ts";
 
 //Joi schema to validate the request body
 const sellerSchema = Joi.object({
@@ -35,7 +35,7 @@ const sellerSchema = Joi.object({
   }),
 });
 
-const newSellerHandler = asyncHandler(
+const createNewSellerAccount = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = sellerSchema.validate(req.body);
 
@@ -55,14 +55,14 @@ const newSellerHandler = asyncHandler(
       pickupAddress: [data.pickupAddress],
     });
 
-    // Generating a jsonwebtoekn
+    // Generating access token
     const token: string = generateToken({
       userId: String(newSeller._id),
     });
 
     // Sending access token
-    res.cookie("accessToken", token);
     if (newSeller) {
+      res.cookie("accessToken", token);
       return res.status(201).json({
         status: "success",
         message: "The account has been created successfully",
@@ -73,4 +73,4 @@ const newSellerHandler = asyncHandler(
   }
 );
 
-export { newSellerHandler };
+export default createNewSellerAccount;

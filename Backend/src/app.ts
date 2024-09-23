@@ -38,7 +38,7 @@ app.use(cookieParser());
 import sellersRouter from "./routes/sellers.routes.ts";
 
 // Defining routes
-app.use("/api/v1/sellers", sellersRouter);
+app.use("/api/v1/s", sellersRouter);
 
 app.use(globalErrorHandler);
 
