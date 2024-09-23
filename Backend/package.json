@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "dev": "NODE_ENV=development nodemon",
+    "dev": "NODE_ENV=development nodemon --trace-warnings",
     "prod": "NODE_ENV=production nodemon",
     "start:prod": "node dist/index.js"
   },
