@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import compression from "compression";
 import { globalErrorHandler } from "./utils/customErrorHandler.utils.ts";
 
 const app: Application = express();
@@ -12,6 +13,8 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+
+app.use(compression());
 
 app.use(
   cors({
@@ -28,7 +31,7 @@ app.use(
 
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: false,
   })
 );
 
