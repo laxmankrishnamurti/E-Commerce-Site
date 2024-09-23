@@ -33,10 +33,6 @@ const productionError = (error: CustomErrorRequestHandler, res: Response) => {
       message: message,
     });
   }
-
-  res.json({
-    ErrorStack: error,
-  });
 };
 
 export const globalErrorHandler = (

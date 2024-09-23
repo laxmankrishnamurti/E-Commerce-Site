@@ -9,7 +9,6 @@ const asyncHandler = (
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
     func(req, res, next).catch((error: ErrorRequestHandler) => {
-      console.log("Async handler error : ", error)
       next(error)
     });
   };

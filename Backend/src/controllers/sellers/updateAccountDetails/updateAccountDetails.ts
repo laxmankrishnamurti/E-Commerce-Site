@@ -77,6 +77,7 @@ const updateAccountDetails = asyncHandler(
     try {
       await seller.save()
     } catch (error) {
+      console.error("error during saving document : ", error)
       return next(new CustomErrorClass(500, "Updation failed, please try again."))
     }
 
