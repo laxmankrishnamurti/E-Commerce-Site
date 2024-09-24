@@ -15,6 +15,7 @@ interface IParams {
 
 const updateAccountDetails = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
+
     const cookie = req.cookies.a_tkn;
     if (!cookie) {
       return next(new CustomErrorClass(403, "Token is expired, login first"));
@@ -61,54 +62,41 @@ const updateAccountDetails = asyncHandler(
     };
 
     let isAddrExist = false;
+    // Getting all Pin Code
     const allPinCode = seller.pickupAddress.map((addr) => addr.pinCode);
 
-    if (changableData?.pinCode) {
+    if (changableData.pinCode) {
       for (let i = 0; i < allPinCode.length; i++) {
         if (Number(changableData.pinCode) === Number(allPinCode[i])) {
           isAddrExist = true;
+
+          seller.pickupAddress[i] = {
+            pickupStreet:changableData.pickupStreet || seller.pickupAddress[i].pickupStreet,
+            city: changableData.city || seller.pickupAddress[i].city,
+            pinCode: Number(changableData.pinCode) || seller.pickupAddress[i].pinCode,
+            state: changableData.state || seller.pickupAddress[i].state,
+            shippingMethod: (changableData?.shippingMethod as "SHOPI" | "SELF") || seller.pickupAddress[i].shippingMethod,
+            shippingFeePrefrences: (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER") || seller.pickupAddress[i].shippingFeePrefrences,
         }
       }
     }
-    console.log("isAddrExist : ", isAddrExist);
+  }
 
     if (!isAddrExist) {
       // Pin code has changed, push a new address object
       seller.pickupAddress.push({
-        pickupStreet:
-          changableData?.pickupStreet || seller.pickupAddress[0]?.pickupStreet,
-        city: changableData?.city || seller.pickupAddress[0]?.city,
-        pinCode: Number(changableData?.pinCode), // Use the new pin code
-        state: changableData?.state || seller.pickupAddress[0]?.state,
+        pickupStreet: changableData.pickupStreet,
+        city: changableData.city,
+        pinCode: Number(changableData.pinCode), 
+        state: changableData.state,
         shippingMethod:
-          (changableData?.shippingMethod as "SHOPI" | "SELF") ||
-          seller.pickupAddress[0]?.shippingMethod ||
-          "SHOPI",
+          (changableData?.shippingMethod as "SHOPI" | "SELF"),
         shippingFeePrefrences:
-          (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER") ||
-          seller.pickupAddress[0]?.shippingFeePrefrences ||
-          "SELF",
+          (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER"),
       });
-    } else {
-      // Pin code hasn't changed, just update the existing address
-      seller.pickupAddress[0] = {
-        pickupStreet:
-          changableData?.pickupStreet || seller.pickupAddress[0]?.pickupStreet,
-        city: changableData?.city || seller.pickupAddress[0]?.city,
-        pinCode:
-          Number(changableData?.pinCode) || seller.pickupAddress[0]?.pinCode,
-        state: changableData?.state || seller.pickupAddress[0]?.state,
-        shippingMethod:
-          (changableData?.shippingMethod as "SHOPI" | "SELF") ||
-          seller.pickupAddress[0]?.shippingMethod ||
-          "SHOPI",
-        shippingFeePrefrences:
-          (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER") ||
-          seller.pickupAddress[0]?.shippingFeePrefrences ||
-          "SELF",
-      };
     }
 
+    
     try {
       await seller.save();
     } catch (error) {
@@ -122,7 +110,8 @@ const updateAccountDetails = asyncHandler(
       status: "success",
       message: "Updation successful",
     });
-  }
+
+}
 );
 
 export default updateAccountDetails;
