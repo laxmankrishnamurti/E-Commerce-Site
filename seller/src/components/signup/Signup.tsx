@@ -1,45 +1,71 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-interface IPanDetails {
-    panNumber: string;
-    panHolder: string;
-}
+// interface IPanDetails {
+//     panNumber: string | null;
+//     panHolder: string;
+//     panPhoto: File | null;
+// }
 
-interface IAccountDetails {
-    accountHolder: string;
-    accountNumber: number;
-    ifscCode: string;
-}
+// interface IAccountDetails {
+//     accountHolder: string;
+//     accountNumber: number;
+//     ifscCode: string;
+// }
 
-interface IPickupAddress {
-    pickupStreet: string;
-    city: string;
-    pinCode: number;
-    state: string;
-    shippingMethod: string;
-    shippingFeePrefrences: string;
-  }
+// interface IPickupAddress {
+//     pickupStreet: string;
+//     city: string;
+//     pinCode: number;
+//     state: string;
+//     shippingMethod: string;
+//     shippingFeePrefrences: string;
+//   }
 
-interface ISignupFormData {
-    fullName: string;
-    email: string;
-    password: string;
-    phoneNumber: number;
-    storeName: string;
-    panDetails: IPanDetails;
-    accountDetails: IAccountDetails;
-    pickupAddress: IPickupAddress;
-}
+// interface ISignupFormData {
+//     fullName: string;
+//     email: string;
+//     password: string;
+//     phoneNumber: number;
+//     storeName: string;
+//     panDetails: IPanDetails;
+//     accountDetails: IAccountDetails;
+//     pickupAddress: IPickupAddress;
+// }
 
 function Signup() {
-    const [signupFormData, setSignupFormData] = useState({
+    const [loading, setLoading] = useState(false); // Loading state
+    const navigate = useNavigate(); // Initialize useNavigate
+    const [signupFormData, setSignupFormData] = useState<{
+        fullName: string;
+        email: string;
+        password: string;
+        phoneNumber: number;
+        storeName: string;
+        panNumber: string;
+        panHolder: string;
+        panPhoto: File | null;  // Update this to allow File or null
+        accountHolder: string;
+        accountNumber: number;
+        ifscCode: string;
+        pickupStreet: string;
+        city: string;
+        pinCode: number;
+        state: string;
+        shippingMethod: string;
+        shippingFeePrefrences: string;
+    }>({
         fullName: " ",
         email: " ",
-        password: " ",
+        password: "",
         phoneNumber: 0,
         storeName: " ",
         panNumber: " ",
         panHolder: " ",
+        panPhoto: null,
         accountHolder: " ",
         accountNumber: 0,
         ifscCode: " ",
@@ -52,38 +78,77 @@ function Signup() {
     })
 
     const handleFieldChanges = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        console.log("E :: ", e)
-        setSignupFormData({...signupFormData, [e.target.name]: e.target.value})
+        const {name, value} = e.target;
+        
+        if(name === "panPhoto"){
+            //Casting file to input element
+            const target = e.target as HTMLInputElement;
+            if(target.files && target.files.length > 0){
+                setSignupFormData({
+                    ...signupFormData,
+                    panPhoto: target.files[0]
+                })
+            }
+        }else {
+            setSignupFormData({...signupFormData, [name]: value})
+        }
     }
 
     // Handling form submit
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const signupData: ISignupFormData = {
-            fullName: signupFormData.fullName,
-            email: signupFormData.email,
-            password: signupFormData.password,
-            phoneNumber: signupFormData.phoneNumber,
-            storeName: signupFormData.storeName,
-            panDetails: {
-                panNumber: signupFormData.panNumber,
-                panHolder: signupFormData.panHolder,
-            },
-            accountDetails: {
-                accountHolder: signupFormData.accountHolder,
-                accountNumber: signupFormData.accountNumber,
-                ifscCode: signupFormData.ifscCode
-            },
-            pickupAddress: {
-                pickupStreet: signupFormData.pickupStreet,
-                city: signupFormData.city,
-                state: signupFormData.state,
-                pinCode: signupFormData.pinCode,
-                shippingMethod: signupFormData.shippingMethod,
-                shippingFeePrefrences: signupFormData.shippingFeePrefrences
-            }
+        setLoading(true); // Set loading to true
+
+        //Creating a FormData object for files
+        const formData = new FormData();
+        if(signupFormData.panPhoto){
+            formData.append("panPhoto", signupFormData.panPhoto)
         }
-        console.log("signup form data : ", signupData)
+
+        // Append the rest of the form data
+        formData.append("fullName", signupFormData.fullName);
+        formData.append("email", signupFormData.email);
+        formData.append("password", signupFormData.password);
+        formData.append("phoneNumber", signupFormData.phoneNumber.toString()); // Convert number to string
+        formData.append("storeName", signupFormData.storeName);
+
+        // Append pan details
+        formData.append("panNumber", signupFormData.panNumber);
+        formData.append("panHolder", signupFormData.panHolder);
+
+        // Append account details
+        formData.append("accountHolder", signupFormData.accountHolder);
+        formData.append("accountNumber", signupFormData.accountNumber.toString()); // Convert number to string
+        formData.append("ifscCode", signupFormData.ifscCode);
+
+        // Append pickup address
+        formData.append("pickupStreet", signupFormData.pickupStreet);
+        formData.append("city", signupFormData.city);
+        formData.append("state", signupFormData.state);
+        formData.append("pinCode", signupFormData.pinCode.toString()); // Convert number to string
+        formData.append("shippingMethod", signupFormData.shippingMethod);
+        formData.append("shippingFeePrefrences", signupFormData.shippingFeePrefrences);
+
+
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/s", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+            if(response){
+                console.log("Backend response : ", response)
+                toast.success('Account created successfully!'); // Success message
+                setTimeout(() => {
+                    navigate("/");
+                }, 3000);
+            }
+        } catch (error) {
+            console.log("Error while creating the account : ", error)
+            toast.error('Error creating account!'); // Error message
+        }  finally {
+            setLoading(false); // Reset loading state
+        }
     }
 
   return (
@@ -94,7 +159,7 @@ function Signup() {
         <div>
             <form 
                 onSubmit={handleFormSubmit}
-                encType="multipart-formdata"
+                encType="multipart/form-data"
             >
                 <div>
                     <div className="mb-4">
@@ -181,6 +246,7 @@ function Signup() {
                         <div className="w-3/12 flex flex-col gap-1 mb-4">
                             <label className="text-text">PAN Photo</label>
                             <input 
+                                onChange={handleFieldChanges}
                                 type="file"
                                 name="panPhoto"
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention bg-bg cursor-pointer"
@@ -299,10 +365,19 @@ function Signup() {
                     </div>
                 </div>
                 <div className="mt-8 mb-4">
-                    <button 
+                    <button type="submit" disabled={loading} className={loading ? 'loading' : ''}>
+                        {loading ? (
+                            <span className="spinner"></span>
+                        ) : (
+                            'Create an Account'
+                        )}
+                    </button>
+
+                    <ToastContainer />
+                    {/* <button 
                         type="submit"
                         className="bg-cta px-8 py-3 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah"
-                    >Create an account</button>
+                    >Create an account</button> */}
                 </div>
             </form>
         </div>
