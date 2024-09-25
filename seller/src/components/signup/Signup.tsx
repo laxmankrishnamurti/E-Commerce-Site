@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./spinner.css"
 
 // interface IPanDetails {
 //     panNumber: string | null;
@@ -138,16 +139,26 @@ function Signup() {
             })
             if(response){
                 console.log("Backend response : ", response)
-                toast.success('Account created successfully!'); // Success message
+                toast.success('Account created successfully!');
                 setTimeout(() => {
                     navigate("/");
                 }, 3000);
             }
         } catch (error) {
-            console.log("Error while creating the account : ", error)
-            toast.error('Error creating account!'); // Error message
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    toast.error(`${error.response.data.message}`);
+                } else {
+                    toast.error('No response received from the server.');
+                }
+            } else if (error instanceof Error) {
+                // Handles non-Axios errors
+                toast.error(`Error: ${error.message}`);
+            } else {
+                toast.error('An unknown error occurred.');
+            }
         }  finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     }
 
@@ -173,6 +184,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="fullName"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -183,6 +195,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="email"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -193,6 +206,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="password"
                                 name="password"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -203,6 +217,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="phoneNumber"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -213,6 +228,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="storeName"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -230,6 +246,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="panNumber"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -240,6 +257,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="panHolder"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -249,6 +267,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="file"
                                 name="panPhoto"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention bg-bg cursor-pointer"
                             />
                         </div>
@@ -266,6 +285,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="accountHolder"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -276,6 +296,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="accountNumber"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -286,6 +307,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="ifscCode"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -303,6 +325,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="pickupStreet"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -313,6 +336,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="city"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -323,6 +347,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="pinCode"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -333,6 +358,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="state"
+                                // required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -342,6 +368,7 @@ function Signup() {
                                 value={signupFormData.shippingMethod}
                                 onChange={handleFieldChanges}
                                 name="shippingMethod"
+                                // required
                                 className='px-4 py-3 outline-none rounded-md hover:cursor-pointer bg-bg text-primary font-bold text-sm'
                             >
                                 <option value="">Select a shipping method</option>
@@ -352,6 +379,7 @@ function Signup() {
                         <div className="w-3/12 flex flex-col gap-1 mb-4">
                             <label className="text-text">Shipping fee prefrences</label>
                             <select 
+                                // required
                                 value={signupFormData.shippingFeePrefrences}
                                 onChange={handleFieldChanges}
                                 name="shippingFeePrefrences"
@@ -365,7 +393,7 @@ function Signup() {
                     </div>
                 </div>
                 <div className="mt-8 mb-4">
-                    <button type="submit" disabled={loading} className={loading ? 'loading' : ''}>
+                    <button type="submit" disabled={loading} className={`${loading ? 'loading' : ''} bg-cta px-8 py-3 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah`}>
                         {loading ? (
                             <span className="spinner"></span>
                         ) : (
@@ -373,12 +401,12 @@ function Signup() {
                         )}
                     </button>
 
-                    <ToastContainer />
                     {/* <button 
                         type="submit"
                         className="bg-cta px-8 py-3 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah"
-                    >Create an account</button> */}
+                        >Create an account</button> */}
                 </div>
+                <ToastContainer />
             </form>
         </div>
     </div>
