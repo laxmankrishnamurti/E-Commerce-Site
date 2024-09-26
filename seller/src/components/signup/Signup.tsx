@@ -108,10 +108,10 @@ function Signup() {
                 }
             })
             if(response){
-                console.log("Backend response : ", response)
+                const {data} = response
                 toast.success('Account created successfully!');
                 setTimeout(() => {
-                    navigate("/");
+                    navigate(`/${data.sellerId}`);
                 }, 3000);
             }
         } catch (error) {
