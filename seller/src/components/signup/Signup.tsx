@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import "./spinner.css"
 
 interface ISignupFormData {
     fullName: string;
@@ -26,8 +24,10 @@ interface ISignupFormData {
 }
 
 function Signup() {
-    const [loading, setLoading] = useState(false); // Loading state
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    //Signup form data format
     const [signupFormData, setSignupFormData] = useState<ISignupFormData>({
         fullName: " ",
         email: " ",
@@ -109,7 +109,7 @@ function Signup() {
             })
             if(response){
                 const {data} = response
-                toast.success('Account created successfully!');
+                toast.success(`${data.message}`);
                 setTimeout(() => {
                     navigate(`/${data.sellerId}`);
                 }, 3000);
@@ -134,8 +134,12 @@ function Signup() {
 
   return (
     <div className='mx-auto my-8 px-8 py-4 w-10/12 h-fit shadow rounded-md'>
-        <div className='mb-8'>
+        <div className='mb-8 flex items-center justify-between'>
             <h1 className='text-2xl text-text font-semibold'>Signup</h1>
+            <div className="flex gap-8">
+                <span className="text-text font-semibold">Already have an account ?</span>
+                <Link to={`/signin`} className="text-ctah font-semibold hover:underline">SignIn</Link>
+            </div>
         </div>
         <div>
             <form 
@@ -154,7 +158,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="fullName"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -165,7 +169,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="email"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -176,7 +180,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="password"
                                 name="password"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -187,7 +191,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="phoneNumber"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -198,7 +202,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="storeName"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -216,7 +220,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="panNumber"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -227,7 +231,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="panHolder"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -237,8 +241,8 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="file"
                                 name="panPhoto"
-                                // required
-                                className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention bg-bg cursor-pointer"
+                                required
+                                className="border border-solid border-black px-2 py-2 text-bg text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention bg-primary cursor-pointer"
                             />
                         </div>
                     </div>
@@ -255,7 +259,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="accountHolder"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -266,7 +270,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="accountNumber"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -277,7 +281,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="ifscCode"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -295,7 +299,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="pickupStreet"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -306,7 +310,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="city"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -317,7 +321,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="pinCode"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -328,7 +332,7 @@ function Signup() {
                                 onChange={handleFieldChanges}
                                 type="text"
                                 name="state"
-                                // required
+                                required
                                 className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
                             />
                         </div>
@@ -338,8 +342,8 @@ function Signup() {
                                 value={signupFormData.shippingMethod}
                                 onChange={handleFieldChanges}
                                 name="shippingMethod"
-                                // required
-                                className='px-4 py-3 outline-none rounded-md hover:cursor-pointer bg-bg text-primary font-bold text-sm'
+                                required
+                                className='px-4 py-3 outline-none rounded-md hover:cursor-pointer bg-primary text-bg font-bold text-sm'
                             >
                                 <option value="">Select a shipping method</option>
                                 <option value="SHOPI">SHOPI</option>
@@ -349,11 +353,11 @@ function Signup() {
                         <div className="w-3/12 flex flex-col gap-1 mb-4">
                             <label className="text-text">Shipping fee prefrences</label>
                             <select 
-                                // required
+                                required
                                 value={signupFormData.shippingFeePrefrences}
                                 onChange={handleFieldChanges}
                                 name="shippingFeePrefrences"
-                                className='px-4 py-3 outline-none rounded-md hover:cursor-pointer bg-bg text-primary font-bold text-sm'
+                                className='px-4 py-3 outline-none rounded-md hover:cursor-pointer bg-primary text-bg font-bold text-sm'
                             >
                                 <option value="">Select shipping fee prefrences</option>
                                 <option value="CUSTOMER">CUSTOMER</option>

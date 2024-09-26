@@ -2,6 +2,7 @@ import {Header, Footer} from '../components/index.components'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './spinner.css'
 
 function Root() {
   return (
