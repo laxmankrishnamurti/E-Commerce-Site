@@ -1,64 +1,34 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./spinner.css"
 
-// interface IPanDetails {
-//     panNumber: string | null;
-//     panHolder: string;
-//     panPhoto: File | null;
-// }
-
-// interface IAccountDetails {
-//     accountHolder: string;
-//     accountNumber: number;
-//     ifscCode: string;
-// }
-
-// interface IPickupAddress {
-//     pickupStreet: string;
-//     city: string;
-//     pinCode: number;
-//     state: string;
-//     shippingMethod: string;
-//     shippingFeePrefrences: string;
-//   }
-
-// interface ISignupFormData {
-//     fullName: string;
-//     email: string;
-//     password: string;
-//     phoneNumber: number;
-//     storeName: string;
-//     panDetails: IPanDetails;
-//     accountDetails: IAccountDetails;
-//     pickupAddress: IPickupAddress;
-// }
+interface ISignupFormData {
+    fullName: string;
+    email: string;
+    password: string;
+    phoneNumber: number;
+    storeName: string;
+    panNumber: string;
+    panHolder: string;
+    panPhoto: File | null;
+    accountHolder: string;
+    accountNumber: number;
+    ifscCode: string;
+    pickupStreet: string;
+    city: string;
+    pinCode: number;
+    state: string;
+    shippingMethod: string;
+    shippingFeePrefrences: string;
+}
 
 function Signup() {
     const [loading, setLoading] = useState(false); // Loading state
     const navigate = useNavigate(); // Initialize useNavigate
-    const [signupFormData, setSignupFormData] = useState<{
-        fullName: string;
-        email: string;
-        password: string;
-        phoneNumber: number;
-        storeName: string;
-        panNumber: string;
-        panHolder: string;
-        panPhoto: File | null;  // Update this to allow File or null
-        accountHolder: string;
-        accountNumber: number;
-        ifscCode: string;
-        pickupStreet: string;
-        city: string;
-        pinCode: number;
-        state: string;
-        shippingMethod: string;
-        shippingFeePrefrences: string;
-    }>({
+    const [signupFormData, setSignupFormData] = useState<ISignupFormData>({
         fullName: " ",
         email: " ",
         password: "",
@@ -393,20 +363,14 @@ function Signup() {
                     </div>
                 </div>
                 <div className="mt-8 mb-4">
-                    <button type="submit" disabled={loading} className={`${loading ? 'loading' : ''} bg-cta px-8 py-3 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah`}>
+                    <button type="submit" disabled={loading} className={`${loading ? 'loading flex justify-center items-center' : ''} bg-cta w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah `}>
                         {loading ? (
                             <span className="spinner"></span>
                         ) : (
                             'Create an Account'
                         )}
                     </button>
-
-                    {/* <button 
-                        type="submit"
-                        className="bg-cta px-8 py-3 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah"
-                        >Create an account</button> */}
                 </div>
-                <ToastContainer />
             </form>
         </div>
     </div>
