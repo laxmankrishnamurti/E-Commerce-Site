@@ -3,7 +3,7 @@
   import "./index.css";
 
   import Root from "./router/Root.tsx";
-  import { Admin, Signup, Signin } from "./components/index.components.ts";
+  import { Admin, Signup, Signin, AccountDashboard } from "./components/index.components.ts";
 
   import {
     createBrowserRouter,
@@ -19,6 +19,7 @@
           <Route path="/:sellerId" element={<Admin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/:sellerId/profile" element={<AccountDashboard />} />
         </Route>
       </>
     )
