@@ -47,9 +47,10 @@ const signinSeller = asyncHandler(
     const token: string = generateToken({ userId: String(user._id) });
 
     // Sending access token
+    // secure: process.env.NODE_ENV === 'production',
     res.cookie("a_tkn", token, {
       httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       maxAge: 24 * 60 * 60 * 1000, 
       path: '/',
     });

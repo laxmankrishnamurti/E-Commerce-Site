@@ -1,20 +1,29 @@
 import {  useParams } from "react-router-dom"
 import userProfileImage from "../../assets/user.png"
+import axios from "axios";
+import { useEffect } from "react";
 // import axios from "axios"
 
 function AccountDashboard() {
     const {sellerId} = useParams()
 
-    ;(async() => {
-        try {
-            const response = await fetch(`http://localhost:4000/api/v1/s/${sellerId}`, {
-                credentials: "include"
-            })
-            console.log("response : ", response)
-        } catch (error) {
-            console.log("Error while fetching account details : ", error)
+        const fetchAccountDetails = async() => {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/v1/s/${sellerId}`, {
+                    withCredentials: true
+                })
+                console.log("Account details : ", response)
+            } catch (error) {
+                if(axios.isAxiosError(error)){
+                    console.log("Errro while fetching account details : ", error)
+                }
+            }
         }
-    })()
+
+        useEffect(() => {
+            fetchAccountDetails()
+        }, [])
+
   return (
     <div className='mx-auto my-8 px-8 py-4 w-10/12 h-fit shadow rounded-md'>
         <div className="flex justify-between">
