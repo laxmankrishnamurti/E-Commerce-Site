@@ -13,6 +13,8 @@ function Root() {
     const sellerId = localStorage.getItem("sellerId")
     if(!sellerId){
       navigate("/signin")
+    }else {
+      navigate(`/${sellerId}`)
     }
    }, [])
 
