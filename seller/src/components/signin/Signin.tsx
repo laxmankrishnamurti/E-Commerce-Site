@@ -30,10 +30,11 @@ function Signin() {
       const response = await axios.post("http://localhost:4000/api/v1/s/signin", signinFormData)
       if(response){
           const {data} = response;
+          localStorage.setItem("sellerId", data.sellerId)
           toast.success('Logged in successfully!');
           setTimeout(() => {
               navigate(`/${data.sellerId}`);
-          }, 3000);
+          }, 2000);
       }
     } catch (error) { 
         if (axios.isAxiosError(error)) {

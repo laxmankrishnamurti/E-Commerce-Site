@@ -1,18 +1,29 @@
 import {Header, Footer} from '../components/index.components'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './spinner.css'
+import { useEffect } from 'react';
 
 function Root() {
+  const navigate = useNavigate()
+
+   useEffect(() => {
+    //fetching sellerId from localstorage
+    const sellerId = localStorage.getItem("sellerId")
+    if(!sellerId){
+      navigate("/signin")
+    }
+   }, [])
+
   return (
-    <div>
+    <>
         <Header/>
         <Outlet/>
         <Footer/>
         <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -22,7 +33,7 @@ function Root() {
         pauseOnHover
         theme="colored"
       />
-    </div>
+    </>
   )
 }
 

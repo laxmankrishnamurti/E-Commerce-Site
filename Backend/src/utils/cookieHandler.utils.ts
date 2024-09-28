@@ -10,8 +10,7 @@ const generateToken = (payload: IPayload): string => {
   try {
     const generatedTokenn: string = jsonwebtoken.sign(
       payload,
-      config.jsonwebtoken_secret,
-      { expiresIn: "1d" }
+      config.jsonwebtoken_secret
     );
     return generatedTokenn;
   } catch (error) {

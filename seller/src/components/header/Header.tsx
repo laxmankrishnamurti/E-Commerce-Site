@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cartPng from '../../assets/cart-orange.png'
 import profileIcon from '../../assets/user.png'
 
 
 function Header() {
   const [logoutVisibility, setLogoutVisibility] = useState<string>("hidden")
+  const navigate = useNavigate()
+
 
   const handleLogoutVisibility = () => {
     if(logoutVisibility === 'hidden'){
@@ -13,6 +15,11 @@ function Header() {
     }else if(logoutVisibility === 'visible'){
       setLogoutVisibility("hidden")
     }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("sellerId")
+      navigate("/signin")
   }
 
   return (
@@ -31,8 +38,11 @@ function Header() {
           <button onClick={handleLogoutVisibility}>
             <img src={profileIcon}/>
           </button>
-          <div className={`${logoutVisibility} absolute shadow shadow-primary top-11 px-8 py-2 rounded-md`}>
-            <button className='text-text'>Logout</button>
+          <div className={`${logoutVisibility} absolute shadow shadow-primary top-14 hover:bg-bg px-8 py-2 rounded-md`}>
+            <button
+              onClick={handleLogout}
+              className='text-text'
+            >Logout</button>
           </div>
         </div>
       </div>
