@@ -18,8 +18,12 @@ function Header() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("sellerId")
+    //Checking the sellerId 
+    const sellerId = localStorage.getItem("sellerId")
+    if(sellerId){
+      localStorage.removeItem("sellerId")
       navigate("/signin")
+    }
   }
 
   return (
