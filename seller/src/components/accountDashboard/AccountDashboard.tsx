@@ -1,6 +1,20 @@
+import {  useParams } from "react-router-dom"
 import userProfileImage from "../../assets/user.png"
+// import axios from "axios"
 
 function AccountDashboard() {
+    const {sellerId} = useParams()
+
+    ;(async() => {
+        try {
+            const response = await fetch(`http://localhost:4000/api/v1/s/${sellerId}`, {
+                credentials: "include"
+            })
+            console.log("response : ", response)
+        } catch (error) {
+            console.log("Error while fetching account details : ", error)
+        }
+    })()
   return (
     <div className='mx-auto my-8 px-8 py-4 w-10/12 h-fit shadow rounded-md'>
         <div className="flex justify-between">
