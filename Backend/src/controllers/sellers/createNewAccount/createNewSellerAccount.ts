@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
-// import { ISellers } from "../../../models/sellers.model.ts";
+import config from "../../../config/config.ts";
 import { generateToken } from "../../../utils/cookieHandler.utils.ts";
 
 //Joi schema to validate the request body
@@ -76,7 +76,13 @@ const createNewSellerAccount = asyncHandler(
 
     // Sending access token
     if (newSeller) {
-      res.cookie("a_tkn", token);
+      res.cookie("a_tkn", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
       return res.status(201).json({
         status: "success",
         message: "The account has been created successfully",

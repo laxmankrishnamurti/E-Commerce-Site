@@ -39,14 +39,15 @@ const deleteAccount = asyncHandler(
     }
 
     // Clear the cookie
-    console.log("Clearing cookie.......")
+    console.log("Clearing cookie.......");
     res.clearCookie("a_tkn", {
       httpOnly: true,
-      path: '/',
-      secure: process.env.NODE_ENV === 'production' && !config.is_local,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+      maxAge: Date.now() - 24 * 60 * 60 * 1000,
+      path: "/",
+      secure: process.env.NODE_ENV === "production" && !config.is_local,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
-    console.log("Cookie cleared")
+    console.log("Cookie cleared");
 
     return res.status(200).json({
       status: "success",

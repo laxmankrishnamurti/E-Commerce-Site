@@ -50,13 +50,11 @@ const signinSeller = asyncHandler(
     // Sending access token
     // secure: process.env.NODE_ENV === 'production',
     res.cookie("a_tkn", token, {
-      httpOnly: true, 
-      maxAge: 24 * 60 * 60 * 1000, 
-      path: '/',
-      // secure: !config.is_local,
-      secure: process.env.NODE_ENV === 'production' && !config.is_local,
-      // sameSite: config.is_local ? "lax" : "none"
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
     });
     return res.status(200).json({
       status: "success",
