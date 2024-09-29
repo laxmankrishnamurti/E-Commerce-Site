@@ -53,8 +53,10 @@ const signinSeller = asyncHandler(
       httpOnly: true, 
       maxAge: 24 * 60 * 60 * 1000, 
       path: '/',
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none"
+      // secure: !config.is_local,
+      secure: process.env.NODE_ENV === 'production' && !config.is_local,
+      // sameSite: config.is_local ? "lax" : "none"
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
     return res.status(200).json({
       status: "success",

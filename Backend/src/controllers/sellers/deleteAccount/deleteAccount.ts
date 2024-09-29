@@ -4,6 +4,7 @@ import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import { verifyToken } from "../../../utils/cookieHandler.utils.ts";
+import config from "../../../config/config.ts";
 
 const paramsSchema = Joi.object({
   sellerId: Joi.string().required(),
@@ -37,9 +38,19 @@ const deleteAccount = asyncHandler(
       return next(new CustomErrorClass(401, "User dosen't exist"));
     }
 
+    // Clear the cookie
+    console.log("Clearing cookie.......")
+    res.clearCookie("a_tkn", {
+      httpOnly: true,
+      path: '/',
+      secure: process.env.NODE_ENV === 'production' && !config.is_local,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    });
+    console.log("Cookie cleared")
+
     return res.status(200).json({
       status: "success",
-      message: "Account has been deleted",
+      message: "Account deleted successfully",
     });
   }
 );

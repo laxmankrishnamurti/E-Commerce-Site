@@ -48,8 +48,6 @@ const sellerSchema = new mongoose.Schema<ISellers>(
     },
     password: {
       type: String,
-      minlength: [6, "Password must have at least 6 characters"],
-      maxlength: [12, "Password is too large, less than 12 characters"],
       required: [true, "Password is rquired"],
     },
     phoneNumber: {

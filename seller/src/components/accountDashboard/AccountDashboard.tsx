@@ -1,7 +1,8 @@
-import {  useParams } from "react-router-dom"
+import {  useNavigate, useParams } from "react-router-dom"
 import userProfileImage from "../../assets/user.png"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 interface ISignupFormData {
     fullName: string;
@@ -30,6 +31,7 @@ interface ISignupFormData {
 
 
 function AccountDashboard() {
+    const [loading, setLoading] = useState(false);
     const [accountDetails, setAccountDetails] = useState<ISignupFormData>({
         fullName: "",
         email: "",
@@ -55,6 +57,7 @@ function AccountDashboard() {
         }]
     })
     const {sellerId} = useParams()
+    const navigate = useNavigate()
 
         const fetchAccountDetails = async() => {
             try {
@@ -64,15 +67,55 @@ function AccountDashboard() {
                 const {data} = response.data
                 setAccountDetails(data)
             } catch (error) {
-                if(axios.isAxiosError(error)){
-                    console.log("Errro while fetching account details : ", error)
-                }
+                if (axios.isAxiosError(error)) {
+                    if (error.response) {
+                        toast.error(`${error.response.data.message}`);
+                    } else {
+                        toast.error('No response received from the server.');
+                    }
+                  } else if (error instanceof Error) {
+                      // Handles non-Axios errors
+                      toast.error(`Error: ${error.message}`);
+                  } else {
+                      toast.error('An unknown error occurred.');
+                  }
             }
         }
 
         useEffect(() => {
             fetchAccountDetails()
         }, [])
+
+        const handleDeleteAccount = async () => {
+            setLoading(true)
+            try {
+                const sellerId = localStorage.getItem("sellerId")
+                const response = await axios.delete(`http://localhost:4000/api/v1/s/${sellerId}`, {
+                    withCredentials: true
+                })    
+                console.log("response on delete action  :", response)
+                if(response.status === 200){
+                    localStorage.removeItem("sellerId")
+                    toast.success(`${response.data.message}`);
+                    navigate("/signin")
+                }  
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    if (error.response) {
+                        toast.error(`${error.response.data.message}`);
+                    } else {
+                        toast.error('No response received from the server.');
+                    }
+                  } else if (error instanceof Error) {
+                      // Handles non-Axios errors
+                      toast.error(`Error: ${error.message}`);
+                  } else {
+                      toast.error('An unknown error occurred.');
+                  }
+            }finally {
+                setLoading(false)
+            }
+        }
 
   return (
     <div className='mx-auto my-8 px-8 py-4 w-10/12 h-fit shadow rounded-md'>
@@ -263,6 +306,19 @@ function AccountDashboard() {
                     }
                 </div>
             </div>
+        </div>
+        <div className="my-4 flex justify-end">
+            <button 
+                onClick={handleDeleteAccount}
+                type="submit" 
+                disabled={loading} 
+                className={`${loading ? 'loading flex justify-center items-center' : ''} bg-discount w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-125 `}>
+                {loading ? (
+                    <span className="spinner"></span>
+                ) : (
+                    'Delete Account'
+                )}
+            </button>
         </div>
     </div>
   )
