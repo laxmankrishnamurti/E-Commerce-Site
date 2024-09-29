@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,13 @@ function Signin() {
     password: "",
   })
 
+  useEffect(() => {
+    const sellerId = localStorage.getItem("sellerId")
+    if(sellerId){
+      navigate(`/${sellerId}`)
+    }
+  }, [])
+
   const handleFieldChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target
     setSigninFormData({...signinFormData, [name]: value})
@@ -27,7 +34,7 @@ function Signin() {
     setLoading(true)
 
     try {
-      const response = await axios.post("http://localhost:4000/api/v1/s/signin", signinFormData)
+      const response = await axios.post("http://localhost:4000/api/v1/s/signin", signinFormData,  {withCredentials: true})
       if(response){
           const {data} = response;
           localStorage.setItem("sellerId", data.sellerId)

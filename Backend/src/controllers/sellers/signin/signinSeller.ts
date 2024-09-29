@@ -5,6 +5,7 @@ import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import { passwordDecryptionHandler } from "../../../utils/passwordHandler.utils.ts";
 import { generateToken } from "../../../utils/cookieHandler.utils.ts";
+import config from "../../../config/config.ts";
 
 const signinSchema = Joi.object({
   email: Joi.string().required(),
@@ -50,9 +51,10 @@ const signinSeller = asyncHandler(
     // secure: process.env.NODE_ENV === 'production',
     res.cookie("a_tkn", token, {
       httpOnly: true, 
-      secure: false,
       maxAge: 24 * 60 * 60 * 1000, 
       path: '/',
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none"
     });
     return res.status(200).json({
       status: "success",
