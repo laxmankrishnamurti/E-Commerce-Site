@@ -1,10 +1,59 @@
 import {  useParams } from "react-router-dom"
 import userProfileImage from "../../assets/user.png"
 import axios from "axios";
-import { useEffect } from "react";
-// import axios from "axios"
+import { useEffect, useState } from "react";
+
+interface ISignupFormData {
+    fullName: string;
+    email: string;
+    password: string;
+    phoneNumber: number;
+    storeName: string;
+    panDetails: {
+        panNumber: string;
+        panHolder: string;
+    }
+    accountDetails: {
+        accountHolder: string;
+        accountNumber: number;
+        ifscCode: string;
+    }
+    pickupAddress: [{
+        pickupStreet: string;
+        city: string;
+        pinCode: number;
+        state: string;
+        shippingMethod: string;
+        shippingFeePrefrences: string;
+    }]
+}
+
 
 function AccountDashboard() {
+    const [accountDetails, setAccountDetails] = useState<ISignupFormData>({
+        fullName: "",
+        email: "",
+        password: "",
+        phoneNumber: 0,
+        storeName: "",
+        panDetails: {
+            panNumber: "",
+            panHolder: "",
+        },
+        accountDetails: {
+            accountHolder: "",
+            accountNumber: 0,
+            ifscCode: "",
+        },
+        pickupAddress: [{
+            pickupStreet: "",
+            city: "",
+            pinCode: 0,
+            state: "",
+            shippingMethod: "",
+            shippingFeePrefrences: "",
+        }]
+    })
     const {sellerId} = useParams()
 
         const fetchAccountDetails = async() => {
@@ -12,7 +61,8 @@ function AccountDashboard() {
                 const response = await axios.get(`http://localhost:4000/api/v1/s/${sellerId}`, {
                     withCredentials: true
                 })
-                console.log("Account details : ", response)
+                const {data} = response.data
+                setAccountDetails(data)
             } catch (error) {
                 if(axios.isAxiosError(error)){
                     console.log("Errro while fetching account details : ", error)
@@ -40,7 +90,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="fullName" className="font-semibold text-text">Full name</label>
                             <input 
-                                value="Laxman Krishnamurti"
+                                value={accountDetails.fullName}
                                 id="fullName"
                                 type="text"
                                 name="fullName"
@@ -50,7 +100,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="email" className="font-semibold text-text">Email</label>
                             <input 
-                                value="laxmankrishnamurti@gmail.com"
+                                value={accountDetails.email}
                                 id="email"
                                 type="text"
                                 name="email"
@@ -60,7 +110,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="phoneNumber" className="font-semibold text-text">Phone number</label>
                             <input 
-                                value="8252764932"
+                                value={accountDetails.phoneNumber}
                                 id="phoneNumber"
                                 type="text"
                                 name="phoneNumber"
@@ -70,7 +120,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="storeName" className="font-semibold text-text">Store name</label>
                             <input 
-                                value="shopi"
+                                value={accountDetails.storeName}
                                 id="storeName"
                                 type="text"
                                 name="storeName"
@@ -85,7 +135,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="panNumber" className="font-semibold text-text">PAN Number</label>
                             <input 
-                                value="KYYPK9816E"
+                                value={accountDetails.panDetails.panNumber}
                                 id="panNumber"
                                 type="text"
                                 name="panNumber"
@@ -95,7 +145,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="panHolder" className="font-semibold text-text">PAN Holder</label>
                             <input 
-                                value="Laxman Krishnamurti"
+                                value={accountDetails.panDetails.panHolder}
                                 id="panHolder"
                                 type="text"
                                 name="panHolder"
@@ -112,7 +162,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="accountHolder" className="font-semibold text-text">Account holder</label>
                             <input 
-                                value="Laxman Krishnamurti"
+                                value={accountDetails.accountDetails.accountHolder}
                                 id="accountHolder"
                                 type="text"
                                 name="accountHolder"
@@ -122,7 +172,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="accountNumber" className="font-semibold text-text">Account number</label>
                             <input 
-                                value="918252764932"
+                                value={accountDetails.accountDetails.accountNumber}
                                 id="accountNumber"
                                 type="text"
                                 name="accountNumber"
@@ -132,7 +182,7 @@ function AccountDashboard() {
                         <div className="flex flex-col gap-2 w-2/5" >
                             <label htmlFor="ifscCode" className="font-semibold text-text">IFSC Code</label>
                             <input 
-                                value="payment@kotak"
+                                value={accountDetails.accountDetails.ifscCode}
                                 id="ifscCode"
                                 type="text"
                                 name="ifscCode"
@@ -145,68 +195,72 @@ function AccountDashboard() {
                     <div className="flex justify-between">
                         <h1 className="text-xl font-semibold">Pickup addresses</h1>
                     </div>
-                    <div className="flex w-full shadow my-4 p-4 justify-between flex-wrap gap-8 rounded-md">
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="pickupStreet" className="font-semibold text-text">Street</label>
-                            <input 
-                                value="Dharamsheela Niwas"
-                                id="pickupStreet"
-                                type="text"
-                                name="pickupStreet"
-                                className="font-thin w-full"
-                            />
+                    {
+                        accountDetails.pickupAddress.map((pickupDetails, index) => (
+                            <div className="flex w-full shadow my-4 p-4 justify-between flex-wrap gap-4 rounded-md" key={index}>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="pickupStreet" className="font-semibold text-text">Street</label>
+                                <input 
+                                    value={pickupDetails.pickupStreet}
+                                    id="pickupStreet"
+                                    type="text"
+                                    name="pickupStreet"
+                                    className="font-thin w-full"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="city" className="font-semibold text-text">City</label>
+                                <input 
+                                    value={pickupDetails.city}
+                                    id="city"
+                                    type="text"
+                                    name="city"
+                                    className="font-thin w-full"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="pinCode" className="font-semibold text-text">PIN Code</label>
+                                <input 
+                                    value={pickupDetails.pinCode}
+                                    id="pinCode"
+                                    type="text"
+                                    name="pinCode"
+                                    className="font-thin w-full"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="state" className="font-semibold text-text">State</label>
+                                <input 
+                                    value={pickupDetails.state}
+                                    id="state"
+                                    type="text"
+                                    name="state"
+                                    className="font-thin w-full"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="shippingMethod" className="font-semibold text-text">Shipping method</label>
+                                <input 
+                                    value={pickupDetails.shippingMethod}
+                                    id="shippingMethod"
+                                    type="text"
+                                    name="shippingMethod"
+                                    className="font-thin w-full"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2 w-2/5" >
+                                <label htmlFor="shippingFeePrefrences" className="font-semibold text-text">Shipping fee prefrences</label>
+                                <input 
+                                    value={pickupDetails.shippingFeePrefrences}
+                                    id="shippingFeePrefrences"
+                                    type="text"
+                                    name="shippingFeePrefrences"
+                                    className="font-thin w-full"
+                                />
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="city" className="font-semibold text-text">City</label>
-                            <input 
-                                value="Patna"
-                                id="city"
-                                type="text"
-                                name="city"
-                                className="font-thin w-full"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="pinCode" className="font-semibold text-text">PIN Code</label>
-                            <input 
-                                value="800020"
-                                id="pinCode"
-                                type="text"
-                                name="pinCode"
-                                className="font-thin w-full"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="state" className="font-semibold text-text">State</label>
-                            <input 
-                                value="Bihar"
-                                id="state"
-                                type="text"
-                                name="state"
-                                className="font-thin w-full"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="shippingMethod" className="font-semibold text-text">Shipping method</label>
-                            <input 
-                                value="SHOPI"
-                                id="shippingMethod"
-                                type="text"
-                                name="shippingMethod"
-                                className="font-thin w-full"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2 w-2/5" >
-                            <label htmlFor="shippingFeePrefrences" className="font-semibold text-text">Shipping fee prefrences</label>
-                            <input 
-                                value="SELF"
-                                id="shippingFeePrefrences"
-                                type="text"
-                                name="shippingFeePrefrences"
-                                className="font-thin w-full"
-                            />
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>
