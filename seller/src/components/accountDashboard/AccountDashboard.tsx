@@ -376,7 +376,7 @@ function AccountDashboard() {
           disabled={loading}
           className={`${
             loading ? "loading flex justify-center items-center" : ""
-          } bg-discount brightness-125 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
+          } bg-discount brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
         >
           {loading ? <span className="spinner"></span> : "Delete Account"}
         </button>
