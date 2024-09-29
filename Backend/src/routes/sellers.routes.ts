@@ -5,6 +5,7 @@ import {
   getAccountDetails,
   updateAccountDetails,
   deleteAccount,
+  handleLogout,
 } from "../controllers/sellers/index.sellerController.ts";
 import fileHandler from "../utils/fileHandler.utils.ts";
 
@@ -17,5 +18,7 @@ router
   .get(getAccountDetails)
   .patch(updateAccountDetails)
   .delete(deleteAccount);
+
+router.route("/:sellerId/logout").delete(handleLogout);
 
 export default router;

@@ -1,27 +1,26 @@
-import {Header, Footer} from '../components/index.components'
-import { Outlet, useNavigate} from 'react-router-dom'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './spinner.css'
-import { useEffect } from 'react';
+import { Header, Footer } from "../components/index.components";
+import { Outlet, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./spinner.css";
+import { useEffect } from "react";
 
 function Root() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-   useEffect(() => {
-    //fetching sellerId from localstorage
-    const sellerId = localStorage.getItem("sellerId")
-    if(!sellerId){
-      navigate("/signin")
+  useEffect(() => {
+    const sellerId = localStorage.getItem("sellerId");
+    if (!sellerId) {
+      navigate("/signin");
     }
-   }, [])
+  }, []);
 
   return (
     <>
-        <Header/>
-        <Outlet/>
-        <Footer/>
-        <ToastContainer
+      <Header />
+      <Outlet />
+      <Footer />
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -34,7 +33,7 @@ function Root() {
         theme="colored"
       />
     </>
-  )
+  );
 }
 
-export default Root
+export default Root;

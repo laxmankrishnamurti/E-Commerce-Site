@@ -39,7 +39,6 @@ const deleteAccount = asyncHandler(
     }
 
     // Clear the cookie
-    console.log("Clearing cookie.......");
     res.clearCookie("a_tkn", {
       httpOnly: true,
       maxAge: 0,
@@ -47,7 +46,6 @@ const deleteAccount = asyncHandler(
       secure: !config.is_local,
       sameSite: config.is_local ? "lax" : "none",
     });
-    console.log("Cookie cleared");
 
     return res.status(200).json({
       status: "success",
