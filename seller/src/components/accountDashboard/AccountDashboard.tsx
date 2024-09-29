@@ -70,12 +70,8 @@ function AccountDashboard() {
           withCredentials: true,
         }
       );
-      console.log("Response : ", response);
       const { data } = response.data;
       setAccountDetails(data);
-      if (response.status === 403) {
-        navigate("/signin");
-      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -110,7 +106,7 @@ function AccountDashboard() {
           withCredentials: true,
         }
       );
-      console.log("response on delete action : ", response);
+
       if (response.status === 200) {
         localStorage.removeItem("sellerId");
         navigate("/signin");

@@ -83,9 +83,10 @@ const createNewSellerAccount = asyncHandler(
         secure: !config.is_local,
         sameSite: config.is_local ? "lax" : "none",
       });
+
       return res.status(201).json({
         status: "success",
-        message: "The account has been created successfully",
+        message: "Account created successfully",
         sellerId: newSeller._id,
       });
     }

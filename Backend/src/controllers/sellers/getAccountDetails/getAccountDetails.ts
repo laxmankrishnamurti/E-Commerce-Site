@@ -17,6 +17,7 @@ const getAccountDetails = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const cookie = req.cookies.a_tkn;
 
+    // If cookie is null or undefined return back
     if (!cookie) {
       return next(new CustomErrorClass(403, "Token is expired, login first"));
     }

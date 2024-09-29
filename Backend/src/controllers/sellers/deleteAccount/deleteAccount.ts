@@ -42,10 +42,10 @@ const deleteAccount = asyncHandler(
     console.log("Clearing cookie.......");
     res.clearCookie("a_tkn", {
       httpOnly: true,
-      maxAge: Date.now() - 24 * 60 * 60 * 1000,
+      maxAge: 0,
       path: "/",
-      secure: process.env.NODE_ENV === "production" && !config.is_local,
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
     });
     console.log("Cookie cleared");
 

@@ -56,6 +56,7 @@ const signinSeller = asyncHandler(
       secure: !config.is_local,
       sameSite: config.is_local ? "lax" : "none",
     });
+
     return res.status(200).json({
       status: "success",
       message: "Login successful",
