@@ -48,6 +48,17 @@ function Signup() {
     shippingFeePrefrences: " ",
   });
 
+  const getDeviceId = () => {
+    const userAgent = navigator.userAgent;
+    const screenResolution = `${window.screen.width}x${window.screen.height}`;
+
+    const deviceId = `${userAgent}-${screenResolution}`;
+    return btoa(deviceId);
+  };
+
+  const deviceId = getDeviceId();
+  console.log("deviceId : ", deviceId);
+
   const handleFieldChanges = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -112,6 +123,7 @@ function Signup() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            deviceId: deviceId,
           },
           withCredentials: true,
         }
