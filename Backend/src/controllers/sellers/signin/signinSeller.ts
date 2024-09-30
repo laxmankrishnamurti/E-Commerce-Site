@@ -4,7 +4,7 @@ import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import { passwordDecryptionHandler } from "../../../utils/passwordHandler.utils.ts";
-import { generateToken } from "../../../utils/cookieHandler.utils.ts";
+import { generateToken } from "../../../utils/generateTokens.utils.ts";
 import config from "../../../config/config.ts";
 
 const signinSchema = Joi.object({

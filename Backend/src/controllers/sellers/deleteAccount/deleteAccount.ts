@@ -3,7 +3,7 @@ import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
-import { verifyToken } from "../../../utils/cookieHandler.utils.ts";
+import { verifyToken } from "../../../utils/generateTokens.utils.ts";
 import config from "../../../config/config.ts";
 
 const paramsSchema = Joi.object({

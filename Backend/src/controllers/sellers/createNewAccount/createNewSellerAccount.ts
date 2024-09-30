@@ -3,7 +3,7 @@ import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import config from "../../../config/config.ts";
-import { generateToken } from "../../../utils/cookieHandler.utils.ts";
+import { generateToken } from "../../../utils/generateTokens.utils.ts";
 
 //Joi schema to validate the request body
 const sellerSchema = Joi.object({

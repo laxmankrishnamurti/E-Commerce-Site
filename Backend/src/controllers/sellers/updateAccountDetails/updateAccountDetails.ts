@@ -3,7 +3,7 @@ import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import Joi from "joi";
 import SELLER from "../../../models/sellers.model.ts";
-import { verifyToken } from "../../../utils/cookieHandler.utils.ts";
+import { verifyToken } from "../../../utils/generateTokens.utils.ts";
 
 const parameterSchema = Joi.object({
   sellerId: Joi.string().required(),
@@ -15,7 +15,6 @@ interface IParams {
 
 const updateAccountDetails = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-
     const cookie = req.cookies.a_tkn;
     if (!cookie) {
       return next(new CustomErrorClass(403, "Token is expired, login first"));
@@ -71,32 +70,38 @@ const updateAccountDetails = asyncHandler(
           isAddrExist = true;
 
           seller.pickupAddress[i] = {
-            pickupStreet:changableData.pickupStreet || seller.pickupAddress[i].pickupStreet,
+            pickupStreet:
+              changableData.pickupStreet ||
+              seller.pickupAddress[i].pickupStreet,
             city: changableData.city || seller.pickupAddress[i].city,
-            pinCode: Number(changableData.pinCode) || seller.pickupAddress[i].pinCode,
+            pinCode:
+              Number(changableData.pinCode) || seller.pickupAddress[i].pinCode,
             state: changableData.state || seller.pickupAddress[i].state,
-            shippingMethod: (changableData?.shippingMethod as "SHOPI" | "SELF") || seller.pickupAddress[i].shippingMethod,
-            shippingFeePrefrences: (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER") || seller.pickupAddress[i].shippingFeePrefrences,
+            shippingMethod:
+              (changableData?.shippingMethod as "SHOPI" | "SELF") ||
+              seller.pickupAddress[i].shippingMethod,
+            shippingFeePrefrences:
+              (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER") ||
+              seller.pickupAddress[i].shippingFeePrefrences,
+          };
         }
       }
     }
-  }
 
     if (!isAddrExist) {
       // Pin code has changed, push a new address object
       seller.pickupAddress.push({
         pickupStreet: changableData.pickupStreet,
         city: changableData.city,
-        pinCode: Number(changableData.pinCode), 
+        pinCode: Number(changableData.pinCode),
         state: changableData.state,
-        shippingMethod:
-          (changableData?.shippingMethod as "SHOPI" | "SELF"),
-        shippingFeePrefrences:
-          (changableData?.shippingFeePrefrences as "SELF" | "CUSTOMER"),
+        shippingMethod: changableData?.shippingMethod as "SHOPI" | "SELF",
+        shippingFeePrefrences: changableData?.shippingFeePrefrences as
+          | "SELF"
+          | "CUSTOMER",
       });
     }
 
-    
     try {
       await seller.save();
     } catch (error) {
@@ -110,8 +115,7 @@ const updateAccountDetails = asyncHandler(
       status: "success",
       message: "Updation successful",
     });
-
-}
+  }
 );
 
 export default updateAccountDetails;

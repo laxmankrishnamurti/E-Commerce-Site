@@ -3,7 +3,7 @@ import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import Joi from "joi";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
-import { verifyToken } from "../../../utils/cookieHandler.utils.ts";
+import { verifyToken } from "../../../utils/generateTokens.utils.ts";
 
 const parameterSchema = Joi.object({
   sellerId: Joi.string().required(),
