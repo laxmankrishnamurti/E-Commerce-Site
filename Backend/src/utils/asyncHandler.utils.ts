@@ -9,7 +9,7 @@ const asyncHandler = (
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
     func(req, res, next).catch((error: ErrorRequestHandler) => {
-      next(error)
+      next(error);
     });
   };
 };

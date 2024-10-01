@@ -4,7 +4,7 @@ import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import { Request, Response, NextFunction } from "express";
 import config from "../../../config/config.ts";
 
-const logoutSchema = Joi.object({
+const cookiesSchema = Joi.object({
   a_tkn: Joi.string().required(),
   r_tkn: Joi.string().required(),
   c_id: Joi.string().required(),
@@ -13,10 +13,10 @@ const logoutSchema = Joi.object({
 
 const handleLogout = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { error } = logoutSchema.validate(req.cookies);
+    const { error } = cookiesSchema.validate(req.cookies);
 
     if (error) {
-      return next(new CustomErrorClass(401, "Token is expired"));
+      return next(new CustomErrorClass(401, `${error.details[0].message}`));
     }
 
     res.clearCookie("a_tkn", {
@@ -26,6 +26,7 @@ const handleLogout = asyncHandler(
       secure: !config.is_local,
       sameSite: config.is_local ? "lax" : "none",
     });
+
     res.clearCookie("r_tkn", {
       httpOnly: true,
       maxAge: 0,
