@@ -8,6 +8,7 @@ import {
   handleLogout,
 } from "../controllers/sellers/index.sellerController.ts";
 import fileHandler from "../utils/fileHandler.utils.ts";
+import authRequest from "../middlewares/authRequest.middleware.ts";
 
 const router: Router = expres.Router();
 
@@ -15,9 +16,9 @@ router.route("/").post(fileHandler.single("panPhoto"), createNewSellerAccount);
 router.route("/signin").post(signinSeller);
 router
   .route("/:sellerId")
-  .get(getAccountDetails)
-  .patch(updateAccountDetails)
-  .delete(deleteAccount);
+  .get(authRequest, getAccountDetails)
+  .patch(authRequest, updateAccountDetails)
+  .delete(authRequest, deleteAccount);
 
 router.route("/:sellerId/logout").delete(handleLogout);
 

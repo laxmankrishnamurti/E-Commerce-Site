@@ -8,7 +8,7 @@ interface IPayload {
 }
 
 // Generate access token
-const generateAccessToken = (payload: IPayload) => {
+export const generateAccessToken = (payload: IPayload) => {
   return jsonwebtoken.sign(payload, config.access_token_secret, {
     expiresIn: 15 * 60,
   });

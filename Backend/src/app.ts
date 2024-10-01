@@ -48,9 +48,11 @@ app.use(cookieParser());
 
 // Importing routes
 import sellersRouter from "./routes/sellers.routes.ts";
+import refreshTokenRouter from "./routes/refreshToken.routes.ts";
 
 // Defining routes
 app.use("/api/v1/s", sellersRouter);
+app.use("/api/v1/s/refresh-token", refreshTokenRouter);
 
 app.use(globalErrorHandler);
 

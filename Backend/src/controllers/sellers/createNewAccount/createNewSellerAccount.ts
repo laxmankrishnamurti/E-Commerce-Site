@@ -89,12 +89,12 @@ const createNewSellerAccount = asyncHandler(
 
     // Sending access token
     if (newSeller) {
+      // generateTokens also make a new entry of the session into the database (refreshtokens collections)
       const tokens = await generateTokens(
         String(newSeller._id),
         String(clientId),
         String(deviceId)
       );
-      console.log("tokens : ", tokens);
 
       res.cookie("a_tkn", tokens.accessToken, {
         httpOnly: true,
