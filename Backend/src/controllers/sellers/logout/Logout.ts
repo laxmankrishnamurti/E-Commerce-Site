@@ -6,6 +6,9 @@ import config from "../../../config/config.ts";
 
 const logoutSchema = Joi.object({
   a_tkn: Joi.string().required(),
+  r_tkn: Joi.string().required(),
+  c_id: Joi.string().required(),
+  d_id: Joi.string().required(),
 });
 
 const handleLogout = asyncHandler(
@@ -17,6 +20,29 @@ const handleLogout = asyncHandler(
     }
 
     res.clearCookie("a_tkn", {
+      httpOnly: true,
+      maxAge: 0,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
+    res.clearCookie("r_tkn", {
+      httpOnly: true,
+      maxAge: 0,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
+
+    res.clearCookie("c_id", {
+      httpOnly: true,
+      maxAge: 0,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
+
+    res.clearCookie("d_id", {
       httpOnly: true,
       maxAge: 0,
       path: "/",

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -48,16 +48,15 @@ function Signup() {
     shippingFeePrefrences: " ",
   });
 
-  const getDeviceId = () => {
+  const getDeviceId = useCallback(() => {
     const userAgent = navigator.userAgent;
     const screenResolution = `${window.screen.width}x${window.screen.height}`;
 
     const deviceId = `${userAgent}-${screenResolution}`;
     return btoa(deviceId);
-  };
+  }, []);
 
   const deviceId = getDeviceId();
-  console.log("deviceId : ", deviceId);
 
   const handleFieldChanges = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

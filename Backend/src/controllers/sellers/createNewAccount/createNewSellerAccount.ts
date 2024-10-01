@@ -42,8 +42,14 @@ const createNewSellerAccount = asyncHandler(
       });
     }
 
-    // Getting deviceId from request header
-    const deviceId = req.headers.deviceId;
+    // Getting deviceId from request rawHeader
+    let deviceId: string | null = null;
+    req.rawHeaders.map((value, index) => {
+      if (value === "deviceId") {
+        deviceId = req.rawHeaders[index + 1];
+      }
+    });
+
     if (!deviceId) {
       return next(new CustomErrorClass(400, "deviceId is required"));
     }
