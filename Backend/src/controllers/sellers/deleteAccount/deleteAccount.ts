@@ -3,7 +3,6 @@ import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
-import { verifyToken } from "../../../utils/generateTokens.utils.ts";
 import config from "../../../config/config.ts";
 
 const paramsSchema = Joi.object({
@@ -18,17 +17,10 @@ const deleteAccount = asyncHandler(
       return next(new CustomErrorClass(403, "Token is expired, login first"));
     }
 
-    const tokenPayload = verifyToken(cookie);
-
     const { error, value } = paramsSchema.validate(req.params);
 
     if (error) {
       return next(new CustomErrorClass(400, error.message));
-    }
-
-    // Confirming both payload are equal or not
-    if (tokenPayload.userId !== value.sellerId) {
-      return next(new CustomErrorClass(401, "Invalid access token"));
     }
 
     const sellerId: string = value.sellerId;

@@ -3,7 +3,6 @@ import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import Joi from "joi";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
-import { verifyToken } from "../../../utils/generateTokens.utils.ts";
 
 const parameterSchema = Joi.object({
   sellerId: Joi.string().required(),
@@ -22,16 +21,10 @@ const getAccountDetails = asyncHandler(
       return next(new CustomErrorClass(403, "Token is expired, login first"));
     }
 
-    const tokenPayload = verifyToken(cookie);
     const { error, value } = parameterSchema.validate(req.params);
 
     if (error) {
       return next(new CustomErrorClass(400, error.message));
-    }
-
-    // Confirming both payload are equal or not
-    if (tokenPayload.userId !== value.sellerId) {
-      return next(new CustomErrorClass(401, "Invalid access token"));
     }
 
     // Casting data

@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
+import { v4 as uuidv4 } from "uuid";
+import generateTokens from "../../../utils/generateTokens.utils.ts";
+import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import config from "../../../config/config.ts";
-import { generateToken } from "../../../utils/generateTokens.utils.ts";
 
 //Joi schema to validate the request body
 const sellerSchema = Joi.object({
@@ -34,12 +36,22 @@ const createNewSellerAccount = asyncHandler(
 
     //Stoping further execution if a required field is missing in the req.body
     if (error) {
-      console.log("Joi validation error : ", error);
       return res.status(400).json({
         status: "fail",
         message: error.details[0].message,
       });
     }
+
+    // Getting deviceId from request header
+    const deviceId = req.headers.deviceId;
+    if (!deviceId) {
+      return next(new CustomErrorClass(400, "deviceId is required"));
+    }
+
+    console.log("deviceId : ", deviceId);
+    // Generating a sessionId or clientId
+    const clientId = uuidv4();
+    console.log("clientId : ", clientId);
 
     const newSeller = await SELLER.create({
       fullName: value.fullName,
@@ -69,16 +81,40 @@ const createNewSellerAccount = asyncHandler(
       ],
     });
 
-    // Generating access token
-    const token: string = generateToken({
-      userId: String(newSeller._id),
-    });
-
     // Sending access token
     if (newSeller) {
-      res.cookie("a_tkn", token, {
+      const tokens = await generateTokens(
+        String(newSeller._id),
+        String(clientId),
+        String(deviceId)
+      );
+      console.log("tokens : ", tokens);
+
+      res.cookie("a_tkn", tokens.accessToken, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 15 * 60 * 1000,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      res.cookie("r_tkn", tokens.refreshToken, {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      res.cookie("c_id", clientId, {
+        httpOnly: true,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      res.cookie("d_id", deviceId, {
+        httpOnly: true,
         path: "/",
         secure: !config.is_local,
         sameSite: config.is_local ? "lax" : "none",

@@ -12,5 +12,5 @@ connectToDatabase(config.db_uri, DB_NAME)
   })
   .catch((error) => {
     console.log("Database connection failed. Msg : ", error);
-    process.exit(1)
+    process.exit(1);
   });
