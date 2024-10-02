@@ -3,7 +3,8 @@ import asyncHandler from "../utils/asyncHandler.utils.ts";
 import Joi from "joi";
 import CustomErrorClass from "../utils/customErrorClass.utils.ts";
 import jsonwebtoken from "jsonwebtoken";
-import config from "../config/config";
+import { CustomJwtPayload } from "../express";
+import config from "../config/config.ts";
 import REFRESHTOKEN from "../models/refreshToken.model.ts";
 
 const cookiesSchema = Joi.object({
@@ -23,10 +24,19 @@ const authRequest = asyncHandler(
 
     const { a_tkn, d_id } = value;
 
-    const result = jsonwebtoken.verify(a_tkn, config.access_token_secret);
+    let result: string | CustomJwtPayload;
+
+    try {
+      result = (await jsonwebtoken.verify(
+        a_tkn,
+        config.access_token_secret
+      )) as string | CustomJwtPayload;
+    } catch (err) {
+      return next(new CustomErrorClass(401, "Access token is expired"));
+    }
 
     if (typeof result === "string") {
-      return next(new CustomErrorClass(401, "Access token is expired"));
+      return next(new CustomErrorClass(401, "Access token is invalid"));
     }
 
     const sessionIdentification = await REFRESHTOKEN.findOne({
