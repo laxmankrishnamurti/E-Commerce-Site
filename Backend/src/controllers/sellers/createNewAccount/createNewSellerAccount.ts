@@ -54,10 +54,8 @@ const createNewSellerAccount = asyncHandler(
       return next(new CustomErrorClass(400, "deviceId is required"));
     }
 
-    console.log("deviceId : ", deviceId);
     // Generating a sessionId or clientId
     const clientId = uuidv4();
-    console.log("clientId : ", clientId);
 
     const newSeller = await SELLER.create({
       fullName: value.fullName,
@@ -87,9 +85,8 @@ const createNewSellerAccount = asyncHandler(
       ],
     });
 
-    // Sending access token
     if (newSeller) {
-      // generateTokens also make a new entry of the session into the database (refreshtokens collections)
+      // Creating a session for the new user and sending appropriate tokens
       const tokens = await generateTokens(
         String(newSeller._id),
         String(clientId),

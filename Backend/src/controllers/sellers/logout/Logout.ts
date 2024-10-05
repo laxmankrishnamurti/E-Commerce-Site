@@ -3,6 +3,7 @@ import Joi from "joi";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import { Request, Response, NextFunction } from "express";
 import config from "../../../config/config.ts";
+import REFRESHTOKEN from "../../../models/refreshToken.model.ts";
 
 const cookiesSchema = Joi.object({
   a_tkn: Joi.string().required(),
@@ -13,48 +14,53 @@ const cookiesSchema = Joi.object({
 
 const handleLogout = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { error } = cookiesSchema.validate(req.cookies);
+    const { error, value } = cookiesSchema.validate(req.cookies);
 
     if (error) {
       return next(new CustomErrorClass(401, `${error.details[0].message}`));
     }
 
-    res.clearCookie("a_tkn", {
-      httpOnly: true,
-      maxAge: 0,
-      path: "/",
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none",
-    });
+    //Destroying existing session
+    const sessionIdentification = await REFRESHTOKEN.findOneAndDelete({sellerId: req.user?.sellerId, clientId: value.c_id, deviceId: value.d_id})
 
-    res.clearCookie("r_tkn", {
-      httpOnly: true,
-      maxAge: 0,
-      path: "/",
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none",
-    });
+    if(sessionIdentification){
+      res.clearCookie("a_tkn", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+  
+      res.clearCookie("r_tkn", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+  
+      res.clearCookie("c_id", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+  
+      res.clearCookie("d_id", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
 
-    res.clearCookie("c_id", {
-      httpOnly: true,
-      maxAge: 0,
-      path: "/",
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none",
-    });
-
-    res.clearCookie("d_id", {
-      httpOnly: true,
-      maxAge: 0,
-      path: "/",
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none",
-    });
-
-    return res.status(200).json({
-      status: "success",
-      message: "You are logout",
-    });
+      return res.status(200).json({
+        status: "success",
+        message: "You are logout",
+      });
+    }
   }
 );
 
