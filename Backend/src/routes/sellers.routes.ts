@@ -20,6 +20,6 @@ router
   .patch(authRequest, updateAccountDetails)
   .delete(authRequest, deleteAccount);
 
-router.route("/:sellerId/logout").delete(handleLogout);
+router.route("/:sellerId/logout").delete(authRequest, handleLogout);
 
 export default router;

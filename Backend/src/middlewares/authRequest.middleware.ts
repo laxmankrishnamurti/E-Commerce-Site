@@ -19,7 +19,7 @@ const authRequest = asyncHandler(
     const { error, value } = cookiesSchema.validate(req.cookies);
 
     if (error) {
-      return next(new CustomErrorClass(400, `${error.details[0].message}`));
+      return next(new CustomErrorClass(400, "You are logged out"));
     }
 
     const { a_tkn, d_id } = value;
