@@ -1,29 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import Joi from "joi";
 import asyncHandler from "../../../utils/asyncHandler.utils.ts";
 import SELLER from "../../../models/sellers.model.ts";
 import CustomErrorClass from "../../../utils/customErrorClass.utils.ts";
 import config from "../../../config/config.ts";
 
-const paramsSchema = Joi.object({
-  sellerId: Joi.string().required(),
-});
-
 const deleteAccount = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const cookie = req.cookies.a_tkn;
-
-    if (!cookie) {
-      return next(new CustomErrorClass(403, "Token is expired, login first"));
-    }
-
-    const { error, value } = paramsSchema.validate(req.params);
-
-    if (error) {
-      return next(new CustomErrorClass(400, error.message));
-    }
-
-    const sellerId: string = value.sellerId;
+    const sellerId = req?.user?.sellerId;
     const deletedSeller = await SELLER.findOneAndDelete({ _id: sellerId });
 
     if (!deletedSeller) {
@@ -31,18 +14,44 @@ const deleteAccount = asyncHandler(
     }
 
     // Clear the cookie
-    res.clearCookie("a_tkn", {
-      httpOnly: true,
-      maxAge: 0,
-      path: "/",
-      secure: !config.is_local,
-      sameSite: config.is_local ? "lax" : "none",
-    });
+    if (deletedSeller) {
+      res.clearCookie("a_tkn", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
 
-    return res.status(200).json({
-      status: "success",
-      message: "Account deleted successfully",
-    });
+      res.clearCookie("r_tkn", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      res.clearCookie("c_id", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      res.clearCookie("d_id", {
+        httpOnly: true,
+        maxAge: 0,
+        path: "/",
+        secure: !config.is_local,
+        sameSite: config.is_local ? "lax" : "none",
+      });
+
+      return res.status(200).json({
+        status: "success",
+        message: "Account deleted successfully",
+      });
+    }
   }
 );
 

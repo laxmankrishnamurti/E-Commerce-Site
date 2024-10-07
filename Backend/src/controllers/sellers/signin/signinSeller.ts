@@ -8,7 +8,6 @@ import config from "../../../config/config.ts";
 import generateTokens from "../../../utils/generateTokens.utils.ts";
 import { v4 as uuidv4 } from "uuid";
 
-
 const signinSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().required(),
@@ -61,50 +60,48 @@ const signinSeller = asyncHandler(
     // Generating a sessionId or clientId
     const clientId = uuidv4();
 
-    if (user) {
-      // Creating a session for the new user and sending appropriate tokens
-      const tokens = await generateTokens(
-        String(user._id),
-        String(clientId),
-        String(deviceId)
-      );
+    // Creating a session for the existing user and sending appropriate tokens
+    const tokens = await generateTokens(
+      String(user._id),
+      String(clientId),
+      String(deviceId)
+    );
 
-      res.cookie("a_tkn", tokens.accessToken, {
-        httpOnly: true,
-        maxAge: 15 * 60 * 1000,
-        path: "/",
-        secure: !config.is_local,
-        sameSite: config.is_local ? "lax" : "none",
-      });
+    res.cookie("a_tkn", tokens.accessToken, {
+      httpOnly: true,
+      maxAge: 15 * 60 * 1000,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
 
-      res.cookie("r_tkn", tokens.refreshToken, {
-        httpOnly: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: "/",
-        secure: !config.is_local,
-        sameSite: config.is_local ? "lax" : "none",
-      });
+    res.cookie("r_tkn", tokens.refreshToken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
 
-      res.cookie("c_id", clientId, {
-        httpOnly: true,
-        path: "/",
-        secure: !config.is_local,
-        sameSite: config.is_local ? "lax" : "none",
-      });
+    res.cookie("c_id", clientId, {
+      httpOnly: true,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
 
-      res.cookie("d_id", deviceId, {
-        httpOnly: true,
-        path: "/",
-        secure: !config.is_local,
-        sameSite: config.is_local ? "lax" : "none",
-      });
+    res.cookie("d_id", deviceId, {
+      httpOnly: true,
+      path: "/",
+      secure: !config.is_local,
+      sameSite: config.is_local ? "lax" : "none",
+    });
 
-      return res.status(200).json({
-        status: "success",
-        message: "Login successful",
-        sellerId: user._id,
-      });
-    }
+    return res.status(200).json({
+      status: "success",
+      message: "Login successful",
+      sellerId: user._id,
+    });
   }
 );
 

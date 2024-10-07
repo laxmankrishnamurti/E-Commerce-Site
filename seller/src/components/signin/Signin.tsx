@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,6 +24,14 @@ function Signin() {
     }
   }, []);
 
+  const getDeviceId = useCallback(() => {
+    const userAgent = navigator.userAgent;
+    const screenResolution = `${window.screen.width}x${window.screen.height}`;
+
+    const deviceId = `${userAgent}-${screenResolution}`;
+    return btoa(deviceId);
+  }, []);
+
   const handleFieldChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSigninFormData({ ...signinFormData, [name]: value });
@@ -34,10 +42,17 @@ function Signin() {
     setLoading(true);
 
     try {
+      const deviceId = getDeviceId();
+
       const response = await axios.post(
         "http://localhost:4000/api/v1/s/signin",
         signinFormData,
-        { withCredentials: true }
+        {
+          headers: {
+            deviceId: deviceId,
+          },
+          withCredentials: true,
+        }
       );
       if (response) {
         const { data } = response;

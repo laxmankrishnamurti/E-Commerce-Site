@@ -56,8 +56,6 @@ function Signup() {
     return btoa(deviceId);
   }, []);
 
-  const deviceId = getDeviceId();
-
   const handleFieldChanges = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -116,6 +114,8 @@ function Signup() {
     );
 
     try {
+      const deviceId = getDeviceId();
+
       const response = await axios.post(
         "http://localhost:4000/api/v1/s",
         formData,

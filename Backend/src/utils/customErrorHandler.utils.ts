@@ -41,7 +41,6 @@ export const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("Error : ", error);
   error.statusCode = error.statusCode || 500;
 
   if (process.env.NODE_ENV === "development") {
