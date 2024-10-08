@@ -1,8 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import userProfileImage from "../../assets/user.png";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import "./accountDashboard.css";
 
 interface ISignupFormData {
   fullName: string;
@@ -32,7 +33,8 @@ interface ISignupFormData {
 }
 
 function AccountDashboard() {
-  const [loading, setLoading] = useState(false);
+  const [isEditable, setIsEditable] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [accountDetails, setAccountDetails] = useState<ISignupFormData>({
     fullName: "",
     email: "",
@@ -62,7 +64,7 @@ function AccountDashboard() {
   const { sellerId } = useParams();
   const navigate = useNavigate();
 
-  const fetchAccountDetails = async () => {
+  const fetchAccountDetails = useCallback(async () => {
     try {
       const response = await axios.get(
         `http://localhost:4000/api/v1/s/${sellerId}`,
@@ -90,9 +92,19 @@ function AccountDashboard() {
         toast.error("An unknown error occurred.");
       }
     }
-  };
+  }, []);
+
+  const location = useLocation();
+  const urlArr = location.pathname.split("/");
 
   useEffect(() => {
+    urlArr.forEach((str) => {
+      if (str === "edit") {
+        setIsEditable(false);
+      } else {
+        setIsEditable(true);
+      }
+    });
     fetchAccountDetails();
   }, []);
 
@@ -140,7 +152,9 @@ function AccountDashboard() {
           <div>
             <div className="flex justify-between">
               <h1 className="text-xl font-semibold">Personal Details</h1>
-              <button className="hover:underline">Edit</button>
+              {isEditable ? (
+                <Link to={`${location.pathname}/edit`}>Edit</Link>
+              ) : null}
             </div>
             <div className="flex w-full shadow my-4 p-4 justify-between flex-wrap gap-8 rounded-md">
               <div className="flex flex-col gap-2 w-2/5">
@@ -152,7 +166,8 @@ function AccountDashboard() {
                   id="fullName"
                   type="text"
                   name="fullName"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -164,7 +179,8 @@ function AccountDashboard() {
                   id="email"
                   type="text"
                   name="email"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -179,7 +195,8 @@ function AccountDashboard() {
                   id="phoneNumber"
                   type="text"
                   name="phoneNumber"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -191,7 +208,8 @@ function AccountDashboard() {
                   id="storeName"
                   type="text"
                   name="storeName"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
             </div>
@@ -208,7 +226,8 @@ function AccountDashboard() {
                   id="panNumber"
                   type="text"
                   name="panNumber"
-                  className="font-thin w-full"
+                  disabled
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -220,7 +239,8 @@ function AccountDashboard() {
                   id="panHolder"
                   type="text"
                   name="panHolder"
-                  className="font-thin w-full"
+                  disabled
+                  className="font-thin w-full bg-white"
                 />
               </div>
             </div>
@@ -242,7 +262,8 @@ function AccountDashboard() {
                   id="accountHolder"
                   type="text"
                   name="accountHolder"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -257,7 +278,8 @@ function AccountDashboard() {
                   id="accountNumber"
                   type="text"
                   name="accountNumber"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2 w-2/5">
@@ -269,7 +291,8 @@ function AccountDashboard() {
                   id="ifscCode"
                   type="text"
                   name="ifscCode"
-                  className="font-thin w-full"
+                  disabled={isEditable}
+                  className="font-thin w-full bg-white"
                 />
               </div>
             </div>
@@ -295,7 +318,8 @@ function AccountDashboard() {
                     id="pickupStreet"
                     type="text"
                     name="pickupStreet"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-2/5">
@@ -307,7 +331,8 @@ function AccountDashboard() {
                     id="city"
                     type="text"
                     name="city"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-2/5">
@@ -319,7 +344,8 @@ function AccountDashboard() {
                     id="pinCode"
                     type="text"
                     name="pinCode"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-2/5">
@@ -331,7 +357,8 @@ function AccountDashboard() {
                     id="state"
                     type="text"
                     name="state"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-2/5">
@@ -346,7 +373,8 @@ function AccountDashboard() {
                     id="shippingMethod"
                     type="text"
                     name="shippingMethod"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-2/5">
@@ -361,7 +389,8 @@ function AccountDashboard() {
                     id="shippingFeePrefrences"
                     type="text"
                     name="shippingFeePrefrences"
-                    className="font-thin w-full"
+                    disabled={isEditable}
+                    className="font-thin w-full bg-white"
                   />
                 </div>
               </div>
@@ -370,16 +399,29 @@ function AccountDashboard() {
         </div>
       </div>
       <div className="my-4 flex justify-end">
-        <button
-          onClick={handleDeleteAccount}
-          type="submit"
-          disabled={loading}
-          className={`${
-            loading ? "loading flex justify-center items-center" : ""
-          } bg-discount brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
-        >
-          {loading ? <span className="spinner"></span> : "Delete Account"}
-        </button>
+        {isEditable ? (
+          <button
+            onClick={handleDeleteAccount}
+            type="submit"
+            disabled={loading}
+            className={`${
+              loading ? "loading flex justify-center items-center" : ""
+            } bg-cta brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
+          >
+            {loading ? <span className="spinner"></span> : "Delete Account"}
+          </button>
+        ) : (
+          <button
+            onClick={handleDeleteAccount}
+            type="submit"
+            disabled={loading}
+            className={`${
+              loading ? "loading flex justify-center items-center" : ""
+            } bg-cta brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
+          >
+            {loading ? <span className="spinner"></span> : "Save"}
+          </button>
+        )}
       </div>
     </div>
   );
