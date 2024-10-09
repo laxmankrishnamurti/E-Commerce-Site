@@ -14,11 +14,6 @@ interface IParams {
 
 const updateAccountDetails = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const cookie = req.cookies.a_tkn;
-    if (!cookie) {
-      return next(new CustomErrorClass(403, "Token is expired, login first"));
-    }
-
     const { error, value } = parameterSchema.validate(req.params);
 
     if (error) {
@@ -99,9 +94,9 @@ const updateAccountDetails = asyncHandler(
       await seller.save();
     } catch (error) {
       console.error("error during saving document : ", error);
-      return next(
-        new CustomErrorClass(500, "Updation failed, please try again.")
-      );
+      if (error instanceof Error) {
+        return next(new CustomErrorClass(500, `${error.message}`));
+      }
     }
 
     return res.status(200).json({

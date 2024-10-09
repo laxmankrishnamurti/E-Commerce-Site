@@ -142,6 +142,47 @@ function AccountDashboard() {
     }
   };
 
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setAccountDetails({ ...accountDetails, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = useCallback(async () => {
+    setLoading(true);
+    try {
+      console.log("accountDetails :: ", accountDetails);
+      const sellerId = localStorage.getItem("sellerId");
+      const response = await axios.patch(
+        `http://localhost:4000/api/v1/s/${sellerId}`,
+        accountDetails,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        navigate(`http://localhost:5173/${sellerId}/profile`);
+        toast.success(`${response.data.message}`);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          toast.error(`${error.response.data.message}`);
+        } else {
+          toast.error("No response received from the server.");
+        }
+      } else if (error instanceof Error) {
+        // Handles non-Axios errors
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <div className="mx-auto my-8 px-8 py-4 w-10/12 h-fit shadow rounded-md">
       <div className="flex justify-between">
@@ -167,6 +208,7 @@ function AccountDashboard() {
                   type="text"
                   name="fullName"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -406,13 +448,13 @@ function AccountDashboard() {
             disabled={loading}
             className={`${
               loading ? "loading flex justify-center items-center" : ""
-            } bg-cta brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
+            } bg-discount brightness-105 w-56 h-12 rounded-md text-text font-semibold shadow shadow-primary hover:brightness-100 `}
           >
             {loading ? <span className="spinner"></span> : "Delete Account"}
           </button>
         ) : (
           <button
-            onClick={handleDeleteAccount}
+            onClick={handleUpdate}
             type="submit"
             disabled={loading}
             className={`${
