@@ -145,7 +145,28 @@ function AccountDashboard() {
   const handleOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setAccountDetails({ ...accountDetails, [e.target.name]: e.target.value });
+    const {name, value} = e.target;
+
+    //Handling deeply nested fields
+    if(name.includes("accountDetails")){
+      console.log("name in accountDetails :", name)
+      const field = name.split(".")
+      setAccountDetails(prevDetails => {
+        const accountDetails = prevDetails.accountDetails
+
+        return {
+          ...prevDetails, 
+          accountDetails: {
+            ...accountDetails,
+            [field[1]]: value
+          }
+        }
+      })
+    }else if(name.includes("pick")){
+
+    }else{
+      setAccountDetails({ ...accountDetails, [name]: value });
+    }
   };
 
   const handleUpdate = useCallback(async () => {
@@ -222,6 +243,7 @@ function AccountDashboard() {
                   type="text"
                   name="email"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -238,6 +260,7 @@ function AccountDashboard() {
                   type="text"
                   name="phoneNumber"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -251,6 +274,7 @@ function AccountDashboard() {
                   type="text"
                   name="storeName"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -268,7 +292,7 @@ function AccountDashboard() {
                   id="panNumber"
                   type="text"
                   name="panNumber"
-                  disabled
+                  disabled = {true}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -281,7 +305,7 @@ function AccountDashboard() {
                   id="panHolder"
                   type="text"
                   name="panHolder"
-                  disabled
+                  disabled = {true}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -305,6 +329,7 @@ function AccountDashboard() {
                   type="text"
                   name="accountHolder"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -321,6 +346,7 @@ function AccountDashboard() {
                   type="text"
                   name="accountNumber"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -334,6 +360,7 @@ function AccountDashboard() {
                   type="text"
                   name="ifscCode"
                   disabled={isEditable}
+                  onChange={handleOnChange}
                   className="font-thin w-full bg-white"
                 />
               </div>
@@ -361,6 +388,7 @@ function AccountDashboard() {
                     type="text"
                     name="pickupStreet"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
@@ -374,6 +402,7 @@ function AccountDashboard() {
                     type="text"
                     name="city"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
@@ -387,6 +416,7 @@ function AccountDashboard() {
                     type="text"
                     name="pinCode"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
@@ -400,6 +430,7 @@ function AccountDashboard() {
                     type="text"
                     name="state"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
@@ -415,7 +446,9 @@ function AccountDashboard() {
                     id="shippingMethod"
                     type="text"
                     name="shippingMethod"
+                    placeholder="SHOPI or SELF"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
@@ -431,7 +464,9 @@ function AccountDashboard() {
                     id="shippingFeePrefrences"
                     type="text"
                     name="shippingFeePrefrences"
+                    placeholder="SELF or CUSTOMER"
                     disabled={isEditable}
+                    onChange={handleOnChange}
                     className="font-thin w-full bg-white"
                   />
                 </div>
