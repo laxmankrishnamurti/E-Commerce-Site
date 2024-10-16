@@ -1,4 +1,4 @@
-# Overview (Dropped ==> Due to insufficient knowledge about system design)
+# Overview (Dropped ==> Due to insufficient knowledge about system design {HLD, LLD architecture})
 
 ## Let see how the site will look like under the hood. Pre-requisites or What are the constraints for the e-commerce site before getting started?
 
