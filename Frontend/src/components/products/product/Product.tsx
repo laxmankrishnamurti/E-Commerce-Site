@@ -18,6 +18,7 @@ function Product({product}: {product:productType}) {
   let {category} = useParams<{category: string}>()
 
   const data = useSelector((state: RootState) => state.cartProduct)
+  console.log(data)
   const dispatch = useDispatch()
   
   const productInfo = {
