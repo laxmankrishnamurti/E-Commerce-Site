@@ -1,5 +1,5 @@
-# Overview
-
+# Overview (Dropped ==> Due to insufficient knowledge about system design {HLD, LLD architecture})
+_Without having prior knowledge about the system design the application starts getting bulky and unmanagable for me and code redability has become very poor_
 ## Let see how the site will look like under the hood. Pre-requisites or What are the constraints for the e-commerce site before getting started?
 
 E-Commerece type ===> B2C Model

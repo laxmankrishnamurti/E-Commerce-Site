@@ -81,57 +81,61 @@ function Signin() {
   };
 
   return (
-    <div className="mx-auto my-14 px-8 py-4 w-4/12 h-fit shadow rounded-md">
-      <div className="flex justify-center items-center flex-col gap-8">
-        <div>
-          <h1 className="text-2xl text-text font-semibold">SignIn</h1>
+    <div className="min-h-screen w-full flex justify-center items-center">
+      <div className="mx-auto my-14 px-8 py-4 w-4/12 h-fit shadow rounded-md">
+        <div className="flex justify-center items-center flex-col gap-8">
+          <div>
+            <h1 className="text-2xl text-text font-semibold">SignIn</h1>
+          </div>
+          <div className="w-full">
+            <form onSubmit={handleFormSubmit}>
+              <div className=" flex flex-col gap-1 mb-4">
+                <label className="text-text">Email</label>
+                <input
+                  value={signinFormData.email}
+                  onChange={handleFieldChanges}
+                  type="text"
+                  name="email"
+                  required
+                  className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
+                />
+              </div>
+              <div className=" flex flex-col gap-1 mb-4">
+                <label className="text-text">Password</label>
+                <input
+                  value={signinFormData.password}
+                  onChange={handleFieldChanges}
+                  type="password"
+                  name="password"
+                  required
+                  className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
+                />
+              </div>
+              <div className="mt-8 mb-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`${
+                    loading ? "loading flex justify-center items-center" : ""
+                  } bg-cta w-full h-12 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah `}
+                >
+                  {loading ? <span className="spinner"></span> : "Continue"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="w-full">
-          <form onSubmit={handleFormSubmit}>
-            <div className=" flex flex-col gap-1 mb-4">
-              <label className="text-text">Email</label>
-              <input
-                value={signinFormData.email}
-                onChange={handleFieldChanges}
-                type="text"
-                name="email"
-                required
-                className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
-              />
-            </div>
-            <div className=" flex flex-col gap-1 mb-4">
-              <label className="text-text">Password</label>
-              <input
-                value={signinFormData.password}
-                onChange={handleFieldChanges}
-                type="password"
-                name="password"
-                required
-                className="border border-solid border-black px-2 py-2 text-text text-sm rounded-md shadow-sm shadow-primary placeholder:text-sm outline-none transition-all duration-300 focus:ring-1 focus:ring-attention"
-              />
-            </div>
-            <div className="mt-8 mb-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className={`${
-                  loading ? "loading flex justify-center items-center" : ""
-                } bg-cta w-full h-12 rounded-md text-text font-semibold shadow shadow-primary hover:bg-ctah `}
-              >
-                {loading ? <span className="spinner"></span> : "Continue"}
-              </button>
-            </div>
-          </form>
+        <div className="flex justify-between my-8">
+          <span className="text-text font-semibold">
+            Don't have an account ?
+          </span>
+          <Link
+            to={`/signup`}
+            className="hover:underline font-semibold text-text"
+          >
+            Signup
+          </Link>
         </div>
-      </div>
-      <div className="flex justify-between my-8">
-        <span className="text-text font-semibold">Don't have an account ?</span>
-        <Link
-          to={`/signup`}
-          className="hover:underline font-semibold text-text"
-        >
-          Signup
-        </Link>
       </div>
     </div>
   );
